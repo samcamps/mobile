@@ -1,28 +1,18 @@
 export interface StockData {
-    MetaData: MetaData;
-    TimeSeries: TimeSeries;
+    
+    "Global Quote": GlobalQuote,
+   
 }
+export interface GlobalQuote{
 
-export interface MetaData {
-    Information: string;
-    Symbol: string;
-    LastRefreshed: string;
-    OutputSize: string;
-    TimeZone: string;
+"01. symbol": string,
+"02. open": string,
+"03. high": string,
+"04. low": string,
+"05. price": string,
+"06. volume": string,
+"07. latest trading day": string,
+"08. previous close": string
+"09. change": string,
+"10. change percent": string
 }
-
-export interface TimeSeries {
- 
-}
-  
-export interface DailyDetails {
-    open: string;
-    high: string;
-    low: string;
-    close: string;
-    adjustedClose: string;
-    volume: string;
-    dividendAmount: string;
-    splitCoefficient: string;
-}
-  
