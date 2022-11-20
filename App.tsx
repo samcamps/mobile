@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Search from './Search';
 import { StockData } from './types';
 
 const App = () => {
@@ -27,8 +28,11 @@ const App = () => {
       <Text>{`Symbool: ${stockData?.['Global Quote']['01. symbol']}`}</Text>
       <Text>{`Prijs: ${stockData?.['Global Quote']['05. price']}`}</Text>
       <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
-
+      <Search/>
       <StatusBar style="auto" />
+    
+
+
     </View>
   );
 }
