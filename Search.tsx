@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
-import { SearchResult, StockData } from './types';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { SearchResult } from './types';
 
 const Search = () => {
 
@@ -11,7 +11,7 @@ const Search = () => {
 
     const getSearch = async () => {
 
-        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=A7ESV77V11YJI2U0`);
+        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=SU7DQ25CON952VSZ`);
         let result = await response.json();
 
         setSearchResult(result);
