@@ -5,29 +5,28 @@ import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SearchResult, StockData } from './types';
 
 const Search = () => {
-console.log("laad search component")
-    const [userInput, setUserInput] = useState<string>("roekoekoe")
+
+    const [userInput, setUserInput] = useState<string>("tesla")
     const [searchResult, setSearchResult] = useState<SearchResult>();
 
     const getSearch = async () => {
+
         let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=A7ESV77V11YJI2U0`);
         let result = await response.json();
 
-        console.log(JSON.stringify(result))
         setSearchResult(result);
-       
     }
 
     useEffect(() => {
         getSearch();
     }, [userInput]);
 
-
     return (
 
         <View>
 
             <View style={{ flexDirection: "column", flex: 0.5 }}>
+
                 <TextInput
                     style={{ height: 40, width: 300, borderColor: "gray", borderWidth: 1 }}
                     onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
@@ -47,12 +46,8 @@ console.log("laad search component")
             </View>
 
         </View>
-
-
-
     )
 };
-
 
 const styles = StyleSheet.create({
     container: {

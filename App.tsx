@@ -6,6 +6,7 @@ import Search from './Search';
 import { StockData } from './types';
 
 const App = () => {
+
   const [stockData, setStockData] = useState<StockData>();
 
   const getStockData = async () => {
@@ -19,7 +20,6 @@ const App = () => {
     getStockData();
   }, []);
 
-
   return (
     <View style={styles.container}>
 
@@ -30,8 +30,6 @@ const App = () => {
       <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
       <Search/>
       <StatusBar style="auto" />
-    
-
 
     </View>
   );
@@ -45,6 +43,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 
 export default App;
