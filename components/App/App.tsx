@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { Foundation } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import HomeScreen from './HomeScreens';
-import SearchScreen from './SearchScreen';
-import PortfolioScreen from './PortfolioScreen';
+import HomeScreen from '../../screens/HomeScreen/HomeScreen';
+import SearchScreen from '../../screens/SearchScreen/SearchScreen';
+import PortfolioScreen from '../../screens/PortfolioScreen/PortfolioScreen';
 
 const Tab = createBottomTabNavigator();
 
