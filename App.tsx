@@ -5,32 +5,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { Foundation } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Search from './Search';
-
-const HomeScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home / Favorites</Text>
-    </View>
-  );
-}
-
-const SearchScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Search</Text>
-      <Search />
-    </View>
-  );
-}
-
-const PortfolioScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Portfolio</Text>
-    </View>
-  );
-}
+import HomeScreen from './HomeScreens';
+import SearchScreen from './SearchScreen';
+import PortfolioScreen from './PortfolioScreen';
 
 const Tab = createBottomTabNavigator();
 
