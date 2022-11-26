@@ -16,7 +16,8 @@ export interface StockData {
 
 export interface SearchResult {
 
-    "bestMatches": ResultItem[]
+    "bestMatches": ResultItem[],
+    "Error Message"?: string
 
 }
 
@@ -32,4 +33,9 @@ export interface ResultItem {
     "8. currency": string,
     "9. matchScore": string
 
+}
+
+export interface ResultTileProps {
+
+    "item":ResultItem
 }
