@@ -31,10 +31,10 @@ const SearchScreen = () => {
                 onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
             />
 
-            {(searchResult === undefined || searchResult?.bestMatches?.length === 0) ? <Text style={{ marginLeft: 30, marginTop: 20 }}>Geen zoekresultaat</Text>
+            {(searchResult === undefined || searchResult.bestMatches?.length === 0) ? <Text style={{ marginLeft: 30, marginTop: 20 }}>Geen zoekresultaat</Text>
 
-                : searchResult?.['Error Message'] ? null
-                : searchResult.bestMatches.slice(0, 3).map((el, index) => <ResultTile item={el} key={index} />)
+                : searchResult['Error Message'] ? null
+                    : searchResult.bestMatches.slice(0, 3).map((el, index) => <ResultTile item={el} key={index} />)
 
             }
         </View>
