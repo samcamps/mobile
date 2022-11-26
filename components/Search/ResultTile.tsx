@@ -10,8 +10,8 @@ const ResultTile = ({ item }: ResultTileProps) => {
     return (
 
         <Pressable style={{
-            flexDirection: "column", flex: 1, justifyContent: 'space-between',
-            marginTop: 20, marginLeft: 30, marginRight: 45,
+            flexDirection: "column", flex: 1, justifyContent: 'space-between', maxHeight:80,
+            marginTop: 20, marginLeft: 30, marginRight: 30,
             backgroundColor: "#dedddc",       
             paddingVertical:10, paddingHorizontal:10
 

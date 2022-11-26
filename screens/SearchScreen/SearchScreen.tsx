@@ -26,15 +26,15 @@ const SearchScreen = () => {
         <View style={{ flexDirection: "column", flex: 0.65, paddingTop: 40 }}>
 
             <TextInput
-                style={{ height: 40, width: 300, borderColor: "gray", borderWidth: 1, marginLeft:30 }}
+                style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 30 }}
+                placeholder="Geef naam of symbool in"
                 onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
             />
 
-            {(searchResult === undefined || searchResult['Error Message'] || searchResult?.bestMatches?.length === 0) ?
+            {(searchResult === undefined || searchResult?.bestMatches?.length === 0) ? <Text style={{ marginLeft: 30, marginTop: 20 }}>Geen zoekresultaat</Text>
 
-                <Text style={{marginLeft:20,  marginTop:20}}>Geen zoekresultaat</Text>
-
-                : searchResult.bestMatches.slice(0, 3).map((el) => <ResultTile item={el} />)
+                : searchResult?.['Error Message'] ? null
+                : searchResult.bestMatches.slice(0, 3).map((el, index) => <ResultTile item={el} key={index} />)
 
             }
         </View>

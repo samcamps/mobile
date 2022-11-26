@@ -37,5 +37,5 @@ export interface ResultItem {
 
 export interface ResultTileProps {
 
-    "item":ResultItem
+    "item": ResultItem
 }
