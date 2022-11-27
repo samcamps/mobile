@@ -39,3 +39,8 @@ export interface ResultTileProps {
 
     "item": ResultItem
 }
+
+export interface Favorites {
+
+    "myFavorites": string[]
+}
