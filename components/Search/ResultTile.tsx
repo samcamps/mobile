@@ -4,31 +4,34 @@ import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { Favorites, ResultTileProps } from '../../types';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
 const ResultTile = ({ item }: ResultTileProps) => {
+
 
     let favorites: Favorites = { myFavorites: [] }
 
     const getData = async () => {
-        let result = await AsyncStorage.getItem("favs");
+        let result = await AsyncStorage.getItem("storedfavs");
         if (result !== null) {
             favorites = JSON.parse(result);
         }
-         console.log(result)
 
     };
-
-    // useEffect(() => {
-    //     getData();
-    // }, []);
 
     const storeData = async () => {
 
         await getData()
-        favorites.myFavorites.push(`${item['1. symbol']}`)
-        await AsyncStorage.setItem("favs", JSON.stringify(favorites));
-        Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
+
+        if (favorites.myFavorites.length < 5) {
+
+            favorites.myFavorites.push(`${item['1. symbol']}`)
+            await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
+            Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
+            console.log(favorites)
+        }
+        else {
+            Alert.alert("Maximum aantal favorieten reeds bereikt")
+            console.log(favorites)
+        }
     };
 
     return (

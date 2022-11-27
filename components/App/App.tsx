@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
-import { Foundation } from '@expo/vector-icons'; 
+import { Foundation } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
@@ -11,6 +11,7 @@ import PortfolioScreen from '../../screens/PortfolioScreen/PortfolioScreen';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
