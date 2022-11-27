@@ -34,7 +34,6 @@ const SearchScreen = () => {
             {searchResult === undefined || searchResult['Error Message'] ? null
                 : searchResult.bestMatches.length === 0 ? <Text style={{ marginLeft: 30, marginTop: 20 }}>Geen zoekresultaat</Text>
                     : searchResult.bestMatches.slice(0, 3).map((el, index) => <ResultTile item={el} key={index} />)
-
             }
         </View>
     )

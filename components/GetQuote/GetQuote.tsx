@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Search from "./components/Search/Search";
-import { StockData } from "./types";
+import { StockData } from "../../types";
+
+//de localstorage bevat een key "storedfavs" met als value 1 Favorites-object.
+//dit Favorites object heeft 1 property "myFavorites" wat bestaat uit een array van maximaal 5 lang met de Symbols als string
+//een favoriet toevoegen of verwijderen betekent dus die array pushen of poppen
+//voor elk Symbol moet een fetch gedaan worden om de actuele prijs/change/etc op te halen
+
 
 const GetQuote = () => {
 
@@ -26,7 +31,6 @@ const GetQuote = () => {
             <Text>{`Symbool: ${stockData?.['Global Quote']['01. symbol']}`}</Text>
             <Text>{`Prijs: ${stockData?.['Global Quote']['05. price']}`}</Text>
             <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
-            <Search />
 
         </View>
     );
@@ -34,11 +38,11 @@ const GetQuote = () => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-  });
+});
 
 export default GetQuote;

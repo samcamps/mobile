@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//naar het portfoliscreen gaan cleared de local storage (voor testing)
+
 const PortfolioScreen = () => {
 
     const clearAsyncStorage = async () => {

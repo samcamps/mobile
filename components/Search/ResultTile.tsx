@@ -6,7 +6,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ResultTile = ({ item }: ResultTileProps) => {
 
-
     let favorites: Favorites = { myFavorites: [] }
 
     const getData = async () => {
@@ -14,7 +13,6 @@ const ResultTile = ({ item }: ResultTileProps) => {
         if (result !== null) {
             favorites = JSON.parse(result);
         }
-
     };
 
     const storeData = async () => {
@@ -26,13 +24,11 @@ const ResultTile = ({ item }: ResultTileProps) => {
             favorites.myFavorites.push(`${item['1. symbol']}`)
             await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
             Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
-            console.log(favorites)
         }
         else {
             Alert.alert("Maximum aantal favorieten reeds bereikt")
-            console.log(favorites)
         }
-    };
+     };
 
     return (
 
@@ -44,15 +40,12 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         }} delayLongPress={500}
             onLongPress={storeData}
-
         >
-
             <Text>{`Symbol: ${item['1. symbol']}`}</Text>
             <Text>{`Name: ${item['2. name']}`}</Text>
             <Text>{`Region: ${item['4. region']}`}</Text>
 
         </Pressable>
-
     )
 }
 
