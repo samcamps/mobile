@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { Favorites, ResultTileProps } from '../../types';
