@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Favorites } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";
@@ -20,16 +20,27 @@ const HomeScreen = () => {
 
     console.log(favorites?.myFavorites);    
 
-    //key = string symbol: warning in console bij dubbele favorites
+    //key = string symbol: error in console bij dubbele favorites
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>Favorites</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Favorites</Text>
             {favorites?.myFavorites.map(favorite => (
-                // <Text key={favorite}>{favorite}</Text>
                 <FavoritesTile symbol={favorite} key={favorite} />
             ))}
         </View>
     );
 }
+
+//CSS nog aanpassen
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        alignItems: "center" 
+    },
+    title: {
+        marginTop: 20,
+        fontWeight: "bold",
+    }
+});
 
 export default HomeScreen;

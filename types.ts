@@ -44,3 +44,8 @@ export interface Favorites {
 
     "myFavorites": string[]
 }
+
+export interface FavoritesTileProps {
+
+    "symbol": string
+}
