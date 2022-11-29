@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { Favorites } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import FavoritesTile from "../../components/Favorites/FavoritesTile";
 
 const HomeScreen = () => {
 
@@ -19,14 +20,13 @@ const HomeScreen = () => {
 
     console.log(favorites?.myFavorites);    
 
-    //custom Tile component voorzien voor mapping data AsyncStorage
-    //GetQuote(): ophalen data per favorite
     //key = string symbol: warning in console bij dubbele favorites
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
             <Text>Favorites</Text>
             {favorites?.myFavorites.map(favorite => (
-                <Text key={favorite}>{favorite}</Text>
+                // <Text key={favorite}>{favorite}</Text>
+                <FavoritesTile symbol={favorite} key={favorite} />
             ))}
         </View>
     );
