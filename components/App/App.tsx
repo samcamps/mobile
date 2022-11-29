@@ -15,16 +15,18 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Favorites" component={HomeScreen} options={{
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />
-        }}
+        <Tab.Screen name="Favorites" component={HomeScreen} options={{  
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />,
+          headerShown: false }}
         />
         <Tab.Screen name="Search" component={SearchScreen} options={{
-          tabBarIcon: ({ color, size }) => <FontAwesome name="search" size={23} color="black" />
+          tabBarIcon: ({ color, size }) => <FontAwesome name="search" size={23} color="black" />,
+          headerShown: false 
         }}
         />
         <Tab.Screen name="Portfolio" component={PortfolioScreen} options={{
-          tabBarIcon: ({ color, size }) => <Foundation name="dollar-bill" size={32} color="black" />
+          tabBarIcon: ({ color, size }) => <Foundation name="dollar-bill" size={32} color="black" />,
+          headerShown: false 
         }}
         />
       </Tab.Navigator>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import ResultTile from '../../components/Search/ResultTile';
 import { SearchResult } from '../../types';
+import Constants from "expo-constants";
 
 const SearchScreen = () => {
 
@@ -23,7 +24,7 @@ const SearchScreen = () => {
 
     return (
 
-        <View style={{ flexDirection: "column", flex: 0.65, paddingTop: 40 }}>
+        <View style={{ flexDirection: "column", flex: 0.65, paddingTop: 80 }}>
 
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 30 }}

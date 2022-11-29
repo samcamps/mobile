@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
 
 //naar het portfoliscreen gaan cleared de local storage (voor testing)
 
@@ -12,10 +13,22 @@ const PortfolioScreen = () => {
     clearAsyncStorage();
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>Portfolio</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>Portfolio</Text>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: Constants.statusBarHeight,
+        flex: 1, 
+        alignItems: "center",
+    },
+    title: {
+        marginTop: 20,
+        fontWeight: "bold",
+    }
+});
 
 export default PortfolioScreen;
