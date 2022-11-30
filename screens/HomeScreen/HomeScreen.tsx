@@ -20,15 +20,20 @@ const HomeScreen = () => {
             };
             getData();
         }, [])
-      );
+    );
 
     //key = string symbol: error in console bij dubbele favorites
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Favorites</Text>
-            {favorites?.myFavorites.map(favorite => (
-                <FavoritesTile symbol={favorite} key={favorite} />
-            ))}
+
+            {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Zoek en voeg uw favoriete stocks toe</Text>
+                : <View>                   
+                    {favorites?.myFavorites.map(favorite => (
+                        <FavoritesTile symbol={favorite} key={favorite} />
+                    ))}
+                </View>
+            }
         </View>
     );
 }
@@ -37,12 +42,15 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
-        flex: 1, 
+        flex: 1,
         alignItems: "center",
     },
     title: {
         marginTop: 20,
         fontWeight: "bold",
+    },
+    placeholder: {
+        marginTop: 30,
     }
 });
 
