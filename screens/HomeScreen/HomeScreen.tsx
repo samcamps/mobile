@@ -30,7 +30,7 @@ const HomeScreen = () => {
             {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Zoek en voeg uw favoriete stocks toe</Text>
                 : <View>                   
                     {favorites?.myFavorites.map(favorite => (
-                        <FavoritesTile singlestock={favorite} key={favorite["1. symbol"]} />
+                        <FavoritesTile stockid={favorite} key={favorite["1. symbol"]} />
                     ))}
                 </View>
             }

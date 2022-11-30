@@ -42,17 +42,22 @@ export interface ResultTileProps {
 
 export interface Favorites {
 
-    "myFavorites": SingleStock[]
+    "myFavorites": StockID[]
 }
 
-export interface SingleStock{
+export interface StockID{
     "1. symbol": string,
     "2. name": string,
 }
 
 
-
 export interface FavoritesTileProps {
 
-    "singlestock": SingleStock
+    "stockid": StockID
+}
+
+export interface PortfolioItem {
+    "aankoopprijs": number,
+    "aantal": number,
+    "stockid": StockID
 }
