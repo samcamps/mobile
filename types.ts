@@ -42,10 +42,17 @@ export interface ResultTileProps {
 
 export interface Favorites {
 
-    "myFavorites": string[]
+    "myFavorites": SingleStock[]
 }
+
+export interface SingleStock{
+    "1. symbol": string,
+    "2. name": string,
+}
+
+
 
 export interface FavoritesTileProps {
 
-    "symbol": string
+    "singlestock": SingleStock
 }
