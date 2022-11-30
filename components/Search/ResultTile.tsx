@@ -27,7 +27,7 @@ const ResultTile = ({ item }: ResultTileProps) => {
         else {
             Alert.alert("Maximum aantal favorieten reeds bereikt")
         }
-     };
+    };
 
     return (
 

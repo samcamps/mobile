@@ -4,22 +4,23 @@ import { Favorites } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";
 import Constants from "expo-constants";
+import { useFocusEffect } from "@react-navigation/native";
 
 const HomeScreen = () => {
 
     const [favorites, setFavorites] = useState<Favorites>();
 
-    useEffect(() => {
-        const getData = async () => {
-            let result = await AsyncStorage.getItem("storedfavs");
-            if (result !== null) {
-                setFavorites(JSON.parse(result));
-            }
-        };
-        getData();
-    }, []);
-
-    console.log(favorites?.myFavorites);    
+    useFocusEffect(
+        React.useCallback(() => {
+            const getData = async () => {
+                let result = await AsyncStorage.getItem("storedfavs");
+                if (result !== null) {
+                    setFavorites(JSON.parse(result));
+                }
+            };
+            getData();
+        }, [])
+      );
 
     //key = string symbol: error in console bij dubbele favorites
     return (
