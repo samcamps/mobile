@@ -19,19 +19,14 @@ const FavoritesTile = ({ symbol }: FavoritesTileProps) => {
 
     console.log(stockData);
 
+    //returned TypeError indien limiet API calls bereikt is 
     return (
-
         <View style={styles.container}>
-
-            {!stockData ? null
-                : <Pressable style={styles.pressable} >
-
-                    <Text>{`Symbool: ${stockData?.['Global Quote']['01. symbol']}`}</Text>
-                    <Text>{`Prijs: ${stockData?.['Global Quote']['05. price']}`}</Text>
-                    <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
-
-                </Pressable>
-            }
+            <Pressable style={styles.pressable} >
+                <Text>{`Symbool: ${stockData?.['Global Quote']['01. symbol']}`}</Text>
+                <Text>{`Prijs: ${stockData?.['Global Quote']['05. price']}`}</Text>
+                <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
+            </Pressable>
         </View>
     )
 }
@@ -50,7 +45,7 @@ const styles = StyleSheet.create({
         width: 315,
         backgroundColor: "#dedddc",
         paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 10, 
     }
 });
 
