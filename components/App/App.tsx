@@ -6,7 +6,7 @@ import { Foundation } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
-import PortfolioScreen from '../../screens/PortfolioScreen/PortfolioScreen';
+import PortfolioScreenNavigator from '../CustomNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,19 +14,17 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Favorites" component={HomeScreen} options={{  
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />,
-          headerShown: false }}
-        />
-        <Tab.Screen name="Search" component={SearchScreen} options={{
-          tabBarIcon: ({ color, size }) => <FontAwesome name="search" size={23} color="black" />,
-          headerShown: false 
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />
         }}
         />
-        <Tab.Screen name="Portfolio" component={PortfolioScreen} options={{
-          tabBarIcon: ({ color, size }) => <Foundation name="dollar-bill" size={32} color="black" />,
-          headerShown: false 
+        <Tab.Screen name="Search" component={SearchScreen} options={{
+          tabBarIcon: ({ color, size }) => <FontAwesome name="search" size={23} color="black" />
+        }}
+        />
+        <Tab.Screen name="Portfolio" component={PortfolioScreenNavigator} options={{
+          tabBarIcon: ({ color, size }) => <Foundation name="dollar-bill" size={32} color="black" /> 
         }}
         />
       </Tab.Navigator>

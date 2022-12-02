@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { Favorites } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";
 import Constants from "expo-constants";
-import { useFocusEffect } from "@react-navigation/native";
 
 const HomeScreen = () => {
 

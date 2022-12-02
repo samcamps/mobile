@@ -7,14 +7,9 @@ import Constants from "expo-constants";
 
 const AddScreen = () => {
 
-    const clearAsyncStorage = async () => {
-        AsyncStorage.clear();
-    }
-    clearAsyncStorage();
-
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Portfolio</Text>
+            <Text>Input Fields</Text>
         </View>
     );
 }
@@ -24,10 +19,6 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         flex: 1, 
         alignItems: "center",
-    },
-    title: {
-        marginTop: 20,
-        fontWeight: "bold",
     }
 });
 
