@@ -8,7 +8,7 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
 
         <Pressable style={{
             flexDirection: "column", flex: 1, justifyContent: 'space-between', maxHeight: 80,
-            marginTop: 20, marginLeft: 30, marginRight: 30,
+            marginTop: 20, marginLeft: 10, marginRight: 10,
             backgroundColor: "#dedddc",
             paddingVertical: 10, paddingHorizontal: 10
 
