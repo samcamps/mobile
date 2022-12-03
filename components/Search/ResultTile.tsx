@@ -20,7 +20,7 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         if (favorites.myFavorites.length < 5) {
 
-            favorites.myFavorites.push({["1. symbol"]: item['1. symbol'], ["2. name"]:item['2. name'] })
+            favorites.myFavorites.push({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'] })
             await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
             Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
         }

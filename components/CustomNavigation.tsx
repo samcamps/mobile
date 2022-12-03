@@ -19,4 +19,4 @@ const PortfolioScreenNavigator = () => {
     );
 }
 
-export default PortfolioScreenNavigator;
+export default PortfolioScreenNavigator;                                                                                                                                                        

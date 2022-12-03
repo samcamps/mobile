@@ -1,3 +1,13 @@
+/* 
+
+Local storage keys:
+
+ "storedfavs" : Favorites object 
+ "storedportfolio" : Portfolio object
+
+
+ */
+
 export interface StockData {
 
     "Global Quote": {
@@ -40,16 +50,23 @@ export interface ResultTileProps {
     "item": ResultItem
 }
 
-export interface Favorites {
 
-    "myFavorites": StockID[]
+export interface ResultTileAddProps {
+
+    "item": ResultItem
+    onAddID: (item: StockID) => void
 }
 
-export interface StockID{
+
+export interface StockID {
     "1. symbol": string,
     "2. name": string,
 }
 
+export interface Favorites {
+
+    "myFavorites": StockID[]
+}
 
 export interface FavoritesTileProps {
 
@@ -57,7 +74,13 @@ export interface FavoritesTileProps {
 }
 
 export interface PortfolioItem {
+
+    "stockid": StockID
     "aankoopprijs": number,
     "aantal": number,
-    "stockid": StockID
+
+}
+
+export interface Portfolio {
+    "myPortfolio": PortfolioItem[]
 }
