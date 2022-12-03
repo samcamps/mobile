@@ -14,11 +14,12 @@ const AddScreen = () => {
     const [selectedStock, setSelectedStock] = useState<StockID>();
     const [selectedAantal, setSelectedAantal] = useState<number>();
     const [selectedAankoopprijs, setSelectedAankoopprijs] = useState<number>();
+    const [currentAankoopprijs, setCurrentAankoopprijs] = useState<number>();
 
     const [userInput, setUserInput] = useState<string>('')
     const [searchResult, setSearchResult] = useState<SearchResult>();
 
-    
+
 
     const getSearch = async () => {
 
@@ -32,15 +33,28 @@ const AddScreen = () => {
         getSearch();
     }, [userInput]);
 
+    const getStockPrice = async () => {
+        if (selectedStock !== undefined) {
+            let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${selectedStock['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
+            let result = await response.json();
+
+            setCurrentAankoopprijs(parseInt(result['Global Quote']['05. price']))
+        }
+    }
+
+    useEffect(() => {
+        getStockPrice();
+    }, [selectedStock]);
+
     return (
 
 
         <View style={styles.container} >
 
             <Text>Input Fields</Text>
-            <Text>Voeg uw aandeel toe:</Text>
+            <Text style={{ fontSize: 14 }}>Voeg uw aandeel toe:</Text>
 
-            <View style={{ flexDirection: "column", flex: 0.65, paddingTop: 80 }}>
+            <View>
 
                 <TextInput
                     style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 30 }}
@@ -54,7 +68,28 @@ const AddScreen = () => {
                 }
             </View>
 
-            <Text>{`Aandeel ${selectedStock?.['1. symbol']} werd geselecteerd`}</Text>
+            <Text style={{ fontSize: 14 }}>Voeg uw aantal toe:</Text>
+            <TextInput
+                style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 30 }}
+                placeholder="Geef aantal in"
+
+                onSubmitEditing={(event) => setSelectedAantal(parseInt(event.nativeEvent.text))} //nog inputvalidatie voorzien
+            />
+            <Text style={{ fontSize: 14 }}>Voeg uw aankoopprijs toe:</Text>
+            <TextInput
+                style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 30 }}
+                placeholder={selectedStock ? `Actuele prijs: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
+                onSubmitEditing={(event) => setSelectedAankoopprijs(parseInt(event.nativeEvent.text))} //nog inputvalidatie voorzien
+            />
+
+
+            {selectedStock ?
+                <Text style={{ alignSelf: "flex-start" }}>{`Aandeel ${selectedStock?.['1. symbol']} werd geselecteerd`}</Text> : null}
+
+            {selectedAantal ? <Text style={{ alignSelf: "flex-start" }}>{`Aantal ${selectedAantal} werd geselecteerd`}</Text> : null}
+
+            {selectedAankoopprijs ?
+                <Text style={{ alignSelf: "flex-start" }}>{`Prijs ${selectedAankoopprijs} werd geselecteerd`}</Text> : null}
 
         </View>
     )

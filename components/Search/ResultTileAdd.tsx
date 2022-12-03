@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { Portfolio, ResultTileAddProps } from '../../types';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
-
-    const handlePress = () => {
-        onAddID(item)
-    }
-
 
     return (
 
@@ -19,7 +13,7 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
             paddingVertical: 10, paddingHorizontal: 10
 
         }} delayLongPress={500}
-            onLongPress={handlePress}
+            onLongPress={() => onAddID(item)}
         >
             <Text>{`Symbol: ${item['1. symbol']}`}</Text>
             <Text>{`Name: ${item['2. name']}`}</Text>
