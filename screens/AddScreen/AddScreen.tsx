@@ -16,14 +16,27 @@ const AddScreen = () => {
     const [selectedAantal, setSelectedAantal] = useState<string>();
     const [selectedAankoopprijs, setSelectedAankoopprijs] = useState<string>();
     const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
-
     const [userInput, setUserInput] = useState<string>('')
     const [searchResult, setSearchResult] = useState<SearchResult>();
 
-    const checkandSet = (input: string) => {
-        input = input.replace(",", ".")
-        setSelectedAankoopprijs(input)
+    const checkandSetAantal = (input: string) => {
+        let toCheck: number = parseFloat(input.replace(",", "."))
+        if (isNaN(toCheck)) {
+            Alert.alert("This is not a number!");
+        } else {
+            setSelectedAantal(input)
+        }
     }
+    const checkandSetAankoopprijs = (input: string) => {
+
+        let toCheck: number = parseFloat(input.replace(",", "."))
+        if (isNaN(toCheck)) {
+            Alert.alert("This is not a number!");
+        } else {
+            setSelectedAankoopprijs(input)
+        }
+    }
+
     const getSearch = async () => {
 
         let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=SU7DQ25CON952VSZ`);
@@ -50,7 +63,6 @@ const AddScreen = () => {
         getStockPrice();
     }, [selectedStock]);
 
-
     let portfolio: Portfolio = { myPortfolio: [] }
 
     const getPortfolioData = async () => {
@@ -72,10 +84,8 @@ const AddScreen = () => {
             await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
 
             Alert.alert("Selectie toegevoegd aan portfolio")
-            
         }
     };
-
 
     return (
 
@@ -85,7 +95,6 @@ const AddScreen = () => {
             <Text style={{ fontSize: 18 }}>Voeg uw aandeel toe:</Text>
 
             <View>
-
                 <TextInput
                     style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
                     placeholder="Geef naam of symbool in"
@@ -104,7 +113,7 @@ const AddScreen = () => {
                 placeholder="Geef aantal in"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                onSubmitEditing={(event) => setSelectedAantal(event.nativeEvent.text)} //nog inputvalidatie voorzien
+                onSubmitEditing={(event) => checkandSetAantal(event.nativeEvent.text)}
             />
             <Text style={{ fontSize: 18 }}>Voeg uw aankoopprijs toe:</Text>
             <TextInput
@@ -113,7 +122,7 @@ const AddScreen = () => {
                 returnKeyType="done"
                 placeholder={selectedStock ? `Actuele prijs: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
                 placeholderTextColor="#444444"
-                onSubmitEditing={(event) => checkandSet(event.nativeEvent.text)} //nog verdere inputvalidatie voorzien
+                onSubmitEditing={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
             />
 
             {selectedStock ?
@@ -124,8 +133,6 @@ const AddScreen = () => {
 
             {selectedAankoopprijs ?
                 <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aankoopprijs ${selectedAankoopprijs} werd geselecteerd`}</Text> : null}
-
-
 
             {(selectedStock && selectedAankoopprijs && selectedAantal) ?
 
@@ -138,11 +145,8 @@ const AddScreen = () => {
 
                 >
                     <Text>Save to portfolio</Text>
-
-
                 </Pressable> : null
             }
-
         </View>
     )
 }
