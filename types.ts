@@ -76,8 +76,8 @@ export interface FavoritesTileProps {
 export interface PortfolioItem {
 
     "stockid": StockID
-    "aankoopprijs": number,
-    "aantal": number,
+    "aankoopprijs": string,
+    "aantal": string,
 
 }
 

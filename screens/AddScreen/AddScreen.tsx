@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import { SearchResult, StockID } from "../../types";
+import { Portfolio, PortfolioItem, SearchResult, StockID } from "../../types";
 import ResultTileAdd from "../../components/Search/ResultTileAdd";
 
 //eerst StockID, prijs, en aantal selecteren (bijgehouden in state)
@@ -13,7 +13,7 @@ import ResultTileAdd from "../../components/Search/ResultTileAdd";
 const AddScreen = () => {
 
     const [selectedStock, setSelectedStock] = useState<StockID>();
-    const [selectedAantal, setSelectedAantal] = useState<number>();
+    const [selectedAantal, setSelectedAantal] = useState<string>();
     const [selectedAankoopprijs, setSelectedAankoopprijs] = useState<string>();
     const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
 
@@ -37,6 +37,7 @@ const AddScreen = () => {
     }, [userInput]);
 
     const getStockPrice = async () => {
+
         if (selectedStock !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${selectedStock['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
             let result = await response.json();
@@ -49,12 +50,39 @@ const AddScreen = () => {
         getStockPrice();
     }, [selectedStock]);
 
+
+    let portfolio: Portfolio = { myPortfolio: [] }
+
+    const getPortfolioData = async () => {
+
+        let result = await AsyncStorage.getItem("storedportfolio");
+        if (result !== null) {
+            portfolio = JSON.parse(result);
+        }
+    };
+
+    const storePortfolioItem = async () => {
+
+        if (selectedStock !== undefined && selectedAankoopprijs !== undefined && selectedAantal !== undefined) {
+
+            await getPortfolioData()
+
+            portfolio.myPortfolio.push({ stockid: selectedStock, aantal: selectedAantal, aankoopprijs: selectedAankoopprijs })
+
+            await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+
+            Alert.alert("Selectie toegevoegd aan portfolio")
+            
+        }
+    };
+
+
     return (
 
         <View style={styles.container} >
 
             <Text>Input Fields</Text>
-            <Text style={{ fontSize: 20 }}>Voeg uw aandeel toe:</Text>
+            <Text style={{ fontSize: 18 }}>Voeg uw aandeel toe:</Text>
 
             <View>
 
@@ -70,15 +98,15 @@ const AddScreen = () => {
                 }
             </View>
 
-            <Text style={{ fontSize: 14 }}>Voeg uw aantal toe:</Text>
+            <Text style={{ fontSize: 18 }}>Voeg uw aantal toe:</Text>
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
                 placeholder="Geef aantal in"
-                keyboardType="number-pad"
+                keyboardType="decimal-pad"
                 returnKeyType="done"
-                onSubmitEditing={(event) => setSelectedAantal(parseInt(event.nativeEvent.text))} //nog inputvalidatie voorzien
+                onSubmitEditing={(event) => setSelectedAantal(event.nativeEvent.text)} //nog inputvalidatie voorzien
             />
-            <Text style={{ fontSize: 14 }}>Voeg uw aankoopprijs toe:</Text>
+            <Text style={{ fontSize: 18 }}>Voeg uw aankoopprijs toe:</Text>
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
                 keyboardType="decimal-pad"
@@ -89,16 +117,34 @@ const AddScreen = () => {
             />
 
             {selectedStock ?
-                <Text style={{ alignSelf: "flex-start" }}>{`Aandeel ${selectedStock?.['1. symbol']} werd geselecteerd`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aandeel ${selectedStock?.['1. symbol']} werd geselecteerd`}</Text> : null}
 
-            {selectedAantal ? <Text style={{ alignSelf: "flex-start" }}>{`Aantal ${selectedAantal} werd geselecteerd`}</Text> : null}
+            {selectedAantal ?
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aantal ${selectedAantal} werd geselecteerd`}</Text> : null}
 
             {selectedAankoopprijs ?
-                <Text style={{ alignSelf: "flex-start" }}>{`Aankoopprijs ${selectedAankoopprijs} werd geselecteerd`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aankoopprijs ${selectedAankoopprijs} werd geselecteerd`}</Text> : null}
+
+
+
+            {(selectedStock && selectedAankoopprijs && selectedAantal) ?
+
+                <Pressable style={{
+                    flexDirection: "column", flex: 1, justifyContent: 'space-between', maxHeight: 40,
+                    marginTop: 20, marginLeft: 10, marginRight: 10,
+                    backgroundColor: "#dedddc",
+                    paddingVertical: 10, paddingHorizontal: 10
+                }} onPress={storePortfolioItem}
+
+                >
+                    <Text>Save to portfolio</Text>
+
+
+                </Pressable> : null
+            }
 
         </View>
     )
-
 }
 
 

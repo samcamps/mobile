@@ -22,15 +22,15 @@ const HomeScreen = () => {
         }, [])
     );
 
-    //key = string symbol: error in console bij dubbele favorites
+    //key = string symbol: error in console bij dubbele favorites => opgelost door index van uw array waar ge over mapped te gebruiken
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Favorites</Text>
 
             {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Zoek en voeg uw favoriete stocks toe</Text>
                 : <View>                   
-                    {favorites?.myFavorites.map(favorite => (
-                        <FavoritesTile stockid={favorite} key={favorite["1. symbol"]} />
+                    {favorites?.myFavorites.map((favorite,index) => (
+                        <FavoritesTile stockid={favorite} key={index} />
                     ))}
                 </View>
             }

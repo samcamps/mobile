@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { Portfolio, ResultTileAddProps } from '../../types';
 
 const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
@@ -13,7 +13,7 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
             paddingVertical: 10, paddingHorizontal: 10
 
         }} delayLongPress={500}
-            onLongPress={() => onAddID(item)}
+            onLongPress={() => onAddID({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'] })}
         >
             <Text>{`Symbol: ${item['1. symbol']}`}</Text>
             <Text>{`Name: ${item['2. name']}`}</Text>
