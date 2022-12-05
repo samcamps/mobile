@@ -4,10 +4,11 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { Portfolio } from "../../types";
+import PortfolioItemTile from "../../components/Portfolio/PortfolioItemTile";
 
 const PortfolioScreen = () => {
 
-    //haal onderstaande functie uit comment om local storage te wissen (testing): 
+    //haal onderstaande functie uit comment om AsyncStorage te wissen (testing): 
 
     // const clearAsyncStorage = async () => {
     //     AsyncStorage.clear();
@@ -20,13 +21,13 @@ const PortfolioScreen = () => {
 
     useFocusEffect(
         React.useCallback(() => {
-            const getData = async () => {
+            const getPortfolioData = async () => {
                 let result = await AsyncStorage.getItem("storedportfolio");
                 if (result !== null) {
                     setPortfolio(JSON.parse(result));
                 }
             };
-            getData();
+            getPortfolioData();
         }, [])
     );
 
@@ -36,6 +37,14 @@ const PortfolioScreen = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Portfolio</Text>
             <Button title="Add stock" onPress={() => navigation.navigate("Add")}/>
+
+            {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>U heeft nog geen portfolio samengesteld.</Text>
+                : <View>                   
+                    {portfolio?.myPortfolio.map((portfolioItem,index) => (
+                        <PortfolioItemTile portfolioItem={portfolioItem} key={index} />
+                    ))}
+                </View>
+            }
         </View>
     );
 }
@@ -49,6 +58,9 @@ const styles = StyleSheet.create({
     title: {
         marginTop: 20,
         fontWeight: "bold",
+    },
+    placeholder: {
+
     }
 });
 

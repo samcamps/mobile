@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     },
     pressable: {
         flexDirection: "column",
-        flex: 1,
-        maxHeight: 80,
         marginTop: 20,
         marginLeft: 30,
         marginRight: 30,
