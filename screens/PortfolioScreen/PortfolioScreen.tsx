@@ -51,7 +51,7 @@ const PortfolioScreen = () => {
             <Button title="Add stock" onPress={() => navigation.navigate("Add")}/>
             <PortfolioTotal marktwaardenArray={marktwaarden} aankoopwaardenArray={aankoopwaarden}/>
 
-            {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>U heeft nog geen portfolio samengesteld.</Text>
+            {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>U heeft nog geen portfolio samengesteld</Text>
                 : <View>                   
                     {portfolio?.myPortfolio.map((portfolioItem,index) => (
                         <PortfolioItemTile portfolioItem={portfolioItem} addMarktwaarden={addMarktwaarden} addAankoopwaarden={addAankoopwaarden} key={index} />
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     placeholder: {
-
+        paddingTop: 20,
     }
 });
 

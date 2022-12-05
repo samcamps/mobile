@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useFocusEffect } from '@react-navigation/native';
-import { PortfolioItem } from '../../types';
-
-interface PortfolioItemTileProps {
-    portfolioItem: PortfolioItem,
-    addMarktwaarden: (marktwaarde: number) => void,
-    addAankoopwaarden: (aankoopwaarde: number) => void,
-}
+import { PortfolioItemTileProps } from '../../types';
 
 const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }: PortfolioItemTileProps) => {
 
@@ -35,36 +29,19 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }
 
     let aankoopprijs: number = parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal);    
     let aantal: number = parseFloat(portfolioItem.aantal);
-    
+
     let prestatie: number = marktwaarde - aankoopprijs;
     let prestatiePercentage: number = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;
     let symbol: string = "";
     if (prestatiePercentage > 0) {
         symbol = "+";
     }
-    
 
-    // useEffect(() => {
-    //     addMarktwaarden(marktwaarde);
-    //     addAankoopwaarden(aankoopprijs);
-    // }, []);
-
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         if (marktwaarde !== undefined) {
-    //             addMarktwaarden(marktwaarde);
-    //         }
-    //         if (aankoopprijs !== undefined) {
-    //             addAankoopwaarden(aankoopprijs);
-    //         }
-    //     }, [])
-    // );
-
-    //Child to Parent communication: berekende marktwaarden en aankoopprijzen terugsturen naar PortfolioScreen
-    //deze twee waarden worden in de parent in useState arrays opgeslagen en als prop meegegeven naar de child PortfolioTotal
-    //voorlopig worden de callbackfuncties (om deze data terug te sturen naar de parent) aangeroepen 
-    //door op de button "Add to total" te klikken
-    //de callbackfuncties moeten aangeroepen worden als de PorfolioItemTiles gerenderd worden (zonder klik of andere actie van user)
+    //Child to Parent communication: berekende marktwaarden en aankoopprijzen terugsturen naar PortfolioScreen.
+    //Deze twee waarden worden in de parent in useState arrays opgeslagen en als prop meegegeven naar de child PortfolioTotal.
+    //Voorlopig worden de callbackfuncties (om deze data terug te sturen naar de parent) aangeroepen 
+    //door op de button "Add to total" te klikken (button is tijdelijk om te testen of callbackfuncties werken).
+    //De callbackfuncties moeten aangeroepen worden als de PorfolioItemTiles gerenderd worden (zonder klik of andere actie van user).
 
     return (
         <View style={styles.container}>

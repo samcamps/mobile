@@ -1,10 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
-interface PortfolioTotalProps {
-    marktwaardenArray: number[],
-    aankoopwaardenArray: number[],
-}
+import { PortfolioTotalProps } from "../../types";
 
 const PortfolioTotal = ({ marktwaardenArray, aankoopwaardenArray }: PortfolioTotalProps) => {
 
@@ -27,7 +23,9 @@ const PortfolioTotal = ({ marktwaardenArray, aankoopwaardenArray }: PortfolioTot
         <View style={styles.container}>
             <Text>{`Totale marktwaarde: ${marktwaardenSum.toFixed(2)}`}</Text>
             <Text>{`Totale aankoopwaarde: ${aankoopwaardenSum.toFixed(2)}`}</Text>
-            <Text>{`Prestatie: ${prestatie.toFixed(2)} (${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>
+            <Text>{`Prestatie: ${prestatie.toFixed(2)}`} {isNaN(prestatiePercentage) ? <Text>(0.00%)</Text> 
+                : <Text>{`(${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>}   
+            </Text>                    
         </View>
     );
 }
