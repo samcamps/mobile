@@ -90,8 +90,7 @@ const AddScreen = () => {
     return (
 
         <View style={styles.container} >
-
-            <Text>Input Fields</Text>
+            
             <Text style={{ fontSize: 18 }}>Voeg uw aandeel toe:</Text>
 
             <View>
