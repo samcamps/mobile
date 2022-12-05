@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 const PortfolioScreenNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Portfolio" component={PortfolioScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Portfolio2" component={PortfolioScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Add" component={AddScreen} options={{
                 headerTitleStyle: {
                     fontSize: 14,
