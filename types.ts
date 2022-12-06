@@ -47,13 +47,13 @@ export interface ResultItem {
 
 export interface ResultTileProps {
 
-    "item": ResultItem
+    item: ResultItem
 }
 
 
 export interface ResultTileAddProps {
 
-    "item": ResultItem
+    item: ResultItem
     onAddID: (item: StockID) => void
 }
 
@@ -65,24 +65,24 @@ export interface StockID {
 
 export interface Favorites {
 
-    "myFavorites": StockID[]
+    myFavorites: StockID[]
 }
 
 export interface FavoritesTileProps {
 
-    "stockid": StockID
+    stockid: StockID
 }
 
 export interface PortfolioItem {
 
-    "stockid": StockID
-    "aankoopprijs": string,
-    "aantal": string,
+    stockid: StockID
+    aankoopprijs: string,
+    aantal: string,
 
 }
 
 export interface Portfolio {
-    "myPortfolio": PortfolioItem[]
+    myPortfolio: PortfolioItem[]
 }
 
 export interface PortfolioTotalProps {

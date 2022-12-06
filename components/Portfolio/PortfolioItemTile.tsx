@@ -37,6 +37,12 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }
         symbol = "+";
     }
 
+    //else -> teken is -
+    //
+    //volgens mij kunde gewoon hier de twee callbackfuncties zetten en KLAAR
+    //
+  
+
     //Child to Parent communication: berekende marktwaarden en aankoopprijzen terugsturen naar PortfolioScreen.
     //Deze twee waarden worden in de parent in useState arrays opgeslagen en als prop meegegeven naar de child PortfolioTotal.
     //Voorlopig worden de callbackfuncties (om deze data terug te sturen naar de parent) aangeroepen 
