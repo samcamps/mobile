@@ -56,14 +56,6 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }
                 <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(2)}`}</Text>
                 <Text>{`Prestatie: ${prestatie.toFixed(2)} (${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>
                 <Text>{`Aantal: ${aantal.toFixed(2)}`}</Text>
-
-                <Button
-                    title="Add to total"
-                    onPress={() => {
-                        addMarktwaarden(marktwaarde);
-                        addAankoopwaarden(aankoopprijs);
-                    }}
-                />
             </View>
         )
     }
