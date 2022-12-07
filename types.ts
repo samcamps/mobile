@@ -1,14 +1,10 @@
 /* 
-
 Local storage keys:
-
  "storedfavs" : Favorites object 
  "storedportfolio" : Portfolio object
-
-
  */
 
-export interface StockData {
+ export interface StockData {
 
     "Global Quote": {
         "01. symbol": string,

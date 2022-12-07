@@ -23,63 +23,63 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }
     }, []);
 
     let marktwaarde: number = 0;
+    let aankoopprijs: number = 0;
+    let aantal: number = 0;
+    let prestatie: number = 0;
+    let prestatiePercentage: number = 0;
+    let symbol: string = "";
+
+
     if (currentAankoopprijs !== undefined) {
         marktwaarde = parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal);
+
+        aankoopprijs = parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal);
+        aantal = parseFloat(portfolioItem.aantal);
+
+        prestatie = marktwaarde - aankoopprijs;
+        prestatiePercentage = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;
+        if (prestatiePercentage > 0) {
+            symbol = "+";
+        }
     }
 
-    let aankoopprijs: number = parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal);    
-    let aantal: number = parseFloat(portfolioItem.aantal);
+    useEffect(() => {
+        addMarktwaarden(marktwaarde);
+        addAankoopwaarden(aankoopprijs);
+    }, [marktwaarde, aankoopprijs]);
+       
 
-    let prestatie: number = marktwaarde - aankoopprijs;
-    let prestatiePercentage: number = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;
-    let symbol: string = "";
-    if (prestatiePercentage > 0) {
-        symbol = "+";
+        return (
+            <View style={styles.container}>
+                <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
+                <Text>{`Marktwaarde: ${marktwaarde.toFixed(2)}`}</Text>
+                <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(2)}`}</Text>
+                <Text>{`Prestatie: ${prestatie.toFixed(2)} (${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>
+                <Text>{`Aantal: ${aantal.toFixed(2)}`}</Text>
+
+                <Button
+                    title="Add to total"
+                    onPress={() => {
+                        addMarktwaarden(marktwaarde);
+                        addAankoopwaarden(aankoopprijs);
+                    }}
+                />
+            </View>
+        )
     }
 
-    //else -> teken is -
-    //
-    //volgens mij kunde gewoon hier de twee callbackfuncties zetten en KLAAR
-    //
-  
+    const styles = StyleSheet.create({
+        container: {
+            flexDirection: "column",
+            marginTop: 20,
+            marginLeft: 30,
+            marginRight: 30,
+            width: 315,
+            backgroundColor: "#dedddc",
+            paddingVertical: 10,
+            paddingHorizontal: 10,
+            justifyContent: 'space-between'
+        },
+    });
 
-    //Child to Parent communication: berekende marktwaarden en aankoopprijzen terugsturen naar PortfolioScreen.
-    //Deze twee waarden worden in de parent in useState arrays opgeslagen en als prop meegegeven naar de child PortfolioTotal.
-    //Voorlopig worden de callbackfuncties (om deze data terug te sturen naar de parent) aangeroepen 
-    //door op de button "Add to total" te klikken (button is tijdelijk om te testen of callbackfuncties werken).
-    //De callbackfuncties moeten aangeroepen worden als de PorfolioItemTiles gerenderd worden (zonder klik of andere actie van user).
-
-    return (
-        <View style={styles.container}>
-            <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-            <Text>{`Marktwaarde: ${marktwaarde.toFixed(2)}`}</Text>
-            <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(2)}`}</Text>
-            <Text>{`Prestatie: ${prestatie.toFixed(2)} (${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>
-            <Text>{`Aantal: ${aantal.toFixed(2)}`}</Text>
-
-            <Button
-                title="Add to total"
-                onPress={() => {
-                    addMarktwaarden(marktwaarde);
-                    addAankoopwaarden(aankoopprijs);
-                }}
-            />
-        </View>
-    )
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "column",
-        marginTop: 20,
-        marginLeft: 30,
-        marginRight: 30,
-        width: 315,
-        backgroundColor: "#dedddc",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        justifyContent: 'space-between'
-    },
-});
-
-export default PortfolioItemTile;
+    export default PortfolioItemTile;
