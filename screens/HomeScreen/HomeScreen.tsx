@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { View, Text, StyleSheet } from "react-native";
-import { Favorites } from "../../types";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { Favorites, StockID } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";
 import Constants from "expo-constants";
@@ -9,6 +9,7 @@ import Constants from "expo-constants";
 const HomeScreen = () => {
 
     const [favorites, setFavorites] = useState<Favorites>();
+    const [favoriteDeleted, setFavoriteDeleted] = useState<boolean>(false);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -19,21 +20,40 @@ const HomeScreen = () => {
                 }
             };
             getData();
-        }, [])
+        }, [favoriteDeleted])
     );
 
-    //key = string symbol: error in console bij dubbele favorites => opgelost door index van uw array waar ge over mapped te gebruiken
+    const deleteFavorite = (stockid: StockID) => {
+        const indexOfObject = favorites?.myFavorites.findIndex(item => item["1. symbol"] === stockid["1. symbol"])
+        console.log(indexOfObject);
+
+        if (indexOfObject !== undefined && favorites !== undefined) {
+            favorites?.myFavorites.splice(indexOfObject, 1);
+            setFavoriteDeleted(true);
+            console.log(favorites);
+            setFavorites(favorites);
+        }
+
+        storeData();
+        Alert.alert(`${stockid['1. symbol']} removed for favorites`);
+    }
+
+    const storeData = async () => {
+        await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));   
+        setFavoriteDeleted(false);     
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Favorites</Text>
 
             {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Zoek en voeg uw favoriete stocks toe</Text>
-                : <View>                   
-                    {favorites?.myFavorites.map((favorite,index) => (
-                        <FavoritesTile stockid={favorite} key={index} />
-                    ))}
+                : <View>
+                    {favorites?.myFavorites.map((favorite, index) => (
+                        <FavoritesTile stockid={favorite} deleteFavorite={deleteFavorite} key={index} />
+                    ))}       
                 </View>
-            }
+            }            
         </View>
     );
 }

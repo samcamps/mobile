@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FavoritesTileProps, StockData } from '../../types';
 
-const FavoritesTile = ({ stockid }: FavoritesTileProps) => {
+const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
 
     const [stockData, setStockData] = useState<StockData>();
 
@@ -19,16 +19,21 @@ const FavoritesTile = ({ stockid }: FavoritesTileProps) => {
 
     console.log(stockData);
 
-    //returned TypeError indien limiet API calls bereikt is 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.pressable} >
-
-                <Text>{`Name: ${stockid['2. name']}`}</Text>
-                <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
-                <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
-                <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
-            </Pressable>
+            <Text>{`Name: ${stockid['2. name']}`}</Text>
+            <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
+            <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
+            <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
+            <View>
+                <Pressable
+                    onPress={() => {
+                        deleteFavorite(stockid);
+                    }}
+                >
+                    <Text>Delete</Text>
+                </Pressable>
+            </View>
         </View>
     )
 }
@@ -36,8 +41,6 @@ const FavoritesTile = ({ stockid }: FavoritesTileProps) => {
 //CSS nog aanpassen
 const styles = StyleSheet.create({
     container: {
-    },
-    pressable: {
         flexDirection: "column",
         marginTop: 20,
         marginLeft: 30,

@@ -67,7 +67,8 @@ export interface Favorites {
 
 export interface FavoritesTileProps {
 
-    stockid: StockID
+    stockid: StockID,
+    deleteFavorite: (stockid: StockID) => void,
 }
 
 export interface PortfolioItem {
