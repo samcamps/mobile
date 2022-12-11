@@ -52,10 +52,10 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden }
         return (
             <View style={styles.container}>
                 <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-                <Text>{`Marktwaarde: ${marktwaarde.toFixed(2)}`}</Text>
-                <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(2)}`}</Text>
-                <Text>{`Prestatie: ${prestatie.toFixed(2)} (${symbol} ${prestatiePercentage.toFixed(2)}%)`}</Text>
-                <Text>{`Aantal: ${aantal.toFixed(2)}`}</Text>
+                <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)}`}</Text>
+                <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)}`}</Text>
+                <Text>{`Prestatie: ${prestatie.toFixed(3)} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
+                <Text>{`Aantal: ${aantal.toFixed(3)}`}</Text>
             </View>
         )
     }
