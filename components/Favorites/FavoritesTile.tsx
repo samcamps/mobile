@@ -24,10 +24,10 @@ const FavoritesTile = ({ stockid }: FavoritesTileProps) => {
         <View style={styles.container}>
             <Pressable style={styles.pressable} >
 
-                <Text>{`Bedrijf: ${stockid['2. name']}`}</Text>
-                <Text>{`Symbool: ${stockid['1. symbol']}`}</Text>
-                <Text>{`Prijs: ${stockData?.['Global Quote']['05. price']}`}</Text>
-                <Text>{`Datum: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
+                <Text>{`Name: ${stockid['2. name']}`}</Text>
+                <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
+                <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
+                <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
             </Pressable>
         </View>
     )

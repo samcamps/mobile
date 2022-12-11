@@ -57,6 +57,7 @@ export interface ResultTileAddProps {
 export interface StockID {
     "1. symbol": string,
     "2. name": string,
+    "8. currency": string
 }
 
 export interface Favorites {

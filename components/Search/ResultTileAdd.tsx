@@ -13,10 +13,11 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
             paddingVertical: 10, paddingHorizontal: 10
 
         }} delayLongPress={500}
-            onLongPress={() => onAddID({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'] })}
+            onLongPress={() => onAddID({ ['1. symbol']: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']:item['8. currency'] })}
         >
-            <Text>{`Symbol: ${item['1. symbol']}`}</Text>
             <Text>{`Name: ${item['2. name']}`}</Text>
+            <Text>{`Symbol: ${item['1. symbol']}`}</Text>
+            <Text>{`Currency: ${item['8. currency']}`}</Text>
             <Text>{`Region: ${item['4. region']}`}</Text>
 
         </Pressable>

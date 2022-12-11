@@ -20,7 +20,7 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         if (favorites.myFavorites.length < 5) {
 
-            favorites.myFavorites.push({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'] })
+            favorites.myFavorites.push({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })
             await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
             Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
         }
@@ -40,8 +40,10 @@ const ResultTile = ({ item }: ResultTileProps) => {
         }} delayLongPress={500}
             onLongPress={storeData}
         >
-            <Text>{`Symbol: ${item['1. symbol']}`}</Text>
+
             <Text>{`Name: ${item['2. name']}`}</Text>
+            <Text>{`Symbol: ${item['1. symbol']}`}</Text>
+            <Text>{`Currency: ${item['8. currency']}`}</Text>
             <Text>{`Region: ${item['4. region']}`}</Text>
 
         </Pressable>
