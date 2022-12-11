@@ -53,6 +53,10 @@ export interface ResultTileAddProps {
     onAddID: (item: StockID) => void
 }
 
+export interface Favorites {
+
+    myFavorites: StockID[]
+}
 
 export interface StockID {
     "1. symbol": string,
@@ -60,15 +64,15 @@ export interface StockID {
     "8. currency": string
 }
 
-export interface Favorites {
-
-    myFavorites: StockID[]
-}
-
 export interface FavoritesTileProps {
 
     stockid: StockID,
     deleteFavorite: (stockid: StockID) => void,
+}
+
+export interface Portfolio {
+
+    myPortfolio: PortfolioItem[]
 }
 
 export interface PortfolioItem {
@@ -79,17 +83,24 @@ export interface PortfolioItem {
 
 }
 
-export interface Portfolio {
-    myPortfolio: PortfolioItem[]
+export interface CalculatedPortfolioItem {
+    symbol: string,
+    name: string,
+    marktwaarde: number,
+    aankoopprijs: number,
+    aantal: number,
+    prestatie: number,
+    prestatiePercentage: number
 }
 
 export interface PortfolioTotalProps {
+
     marktwaardenArray: number[],
     aankoopwaardenArray: number[],
 }
 
 export interface PortfolioItemTileProps {
-    portfolioItem: PortfolioItem,
-    addMarktwaarden: (marktwaarde: number) => void,
-    addAankoopwaarden: (aankoopwaarde: number) => void,
+
+    calculatedPortfolioItem: CalculatedPortfolioItem,
+    deletePortfolioItem: (symbol: string) => void,
 }

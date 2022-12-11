@@ -35,7 +35,7 @@ const HomeScreen = () => {
         }
 
         storeData();
-        Alert.alert(`${stockid['1. symbol']} removed for favorites`);
+        Alert.alert(`${stockid['1. symbol']} removed from favorites`);
     }
 
     const storeData = async () => {
