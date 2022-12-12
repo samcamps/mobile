@@ -8,8 +8,11 @@ const YahooScreen = () => {
     return (
 
         <WebView
+        
+            originWhiteList={['*']}
+            cacheEnabled
+            source={{ uri: `https://finance.yahoo.com/quote/${route.params?.symbol}` }}
 
-              source={{ uri: `https://finance.yahoo.com/quote/${route.params?.symbol}` }}
         />
     );
 
