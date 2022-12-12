@@ -18,14 +18,20 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         await getData()
 
-        if (favorites.myFavorites.length < 5) {
+        let bestaatAl = favorites.myFavorites.find((el) => el['1. symbol']=== item['1. symbol']);
+
+        if (bestaatAl){
+            Alert.alert("This stock is already in your favorites!")
+        }
+
+        else if (favorites.myFavorites.length < 5) {
 
             favorites.myFavorites.push({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })
             await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
             Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
         }
         else {
-            Alert.alert("Maximum aantal favorieten reeds bereikt")
+            Alert.alert("Maximum number of favorites reached!")
         }
     };
 
