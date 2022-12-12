@@ -1,27 +1,29 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AddScreen from "../screens/AddScreen/AddScreen";
-import PortfolioScreen from "../screens/PortfolioScreen/PortfolioScreen";
+import HomeScreen from "./HomeScreen";
+import YahooScreen from "./YahooScreen";
 
 
 const Stack = createNativeStackNavigator();
 
-const PortfolioScreenNavigator = () => {
+const HomeScreenNavigator = () => {
     return (
         
             <Stack.Navigator>
-                <Stack.Screen name="Portfolio2" component={PortfolioScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="Add" component={AddScreen} options={{
+               
+
+                <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="Yahoo" component={YahooScreen} options={{
                     headerTitleStyle: {
                         fontSize: 14,
                         fontWeight: "bold",
                     }
                 }} />
-
+                    
             </Stack.Navigator>
         
     );
 }
 
-export default PortfolioScreenNavigator;
+export default HomeScreenNavigator;
 

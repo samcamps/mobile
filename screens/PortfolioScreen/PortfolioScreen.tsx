@@ -85,8 +85,6 @@ const PortfolioScreen = () => {
         getStockPrice(portfolioItem);  
     });
 
-
-
     console.log(`nieuwe portfolio: ${calculatedPortfolio}`);
 
     const deletePortfolioItem = (symbol: string) => {

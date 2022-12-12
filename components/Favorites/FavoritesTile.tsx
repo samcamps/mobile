@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { FavoritesTileProps, StockData } from '../../types';
+import { useNavigation } from "@react-navigation/native";
 
 const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
 
+    const navigation: any = useNavigation();
     const [stockData, setStockData] = useState<StockData>();
 
     const getStockData = async () => {
@@ -34,7 +36,12 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
                     <Text>Delete</Text>
                 </Pressable>
             </View>
-        </View>
+
+            <View style={{ alignItems: "flex-end" }}>
+                <Button title="More info" onPress={() => navigation.navigate("Yahoo", { symbol: stockData?.['Global Quote']['01. symbol'] })} />
+            </View>
+
+        </View >
     )
 }
 

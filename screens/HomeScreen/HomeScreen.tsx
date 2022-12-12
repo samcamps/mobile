@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { Favorites, StockID } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -7,7 +7,7 @@ import FavoritesTile from "../../components/Favorites/FavoritesTile";
 import Constants from "expo-constants";
 
 const HomeScreen = () => {
-
+    
     const [favorites, setFavorites] = useState<Favorites>();
     const [favoriteDeleted, setFavoriteDeleted] = useState<boolean>(false);
 

@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
 import PortfolioScreenNavigator from '../CustomNavigation';
+import HomeScreenNavigator from '../../screens/HomeScreen/CustomHomeScreenNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="Favorites" component={HomeScreen} options={{  
+        <Tab.Screen name="Favorites" component={HomeScreenNavigator} options={{  
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />
         }}
         />
