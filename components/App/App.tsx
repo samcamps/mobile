@@ -4,10 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { Foundation } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
-import PortfolioScreenNavigator from '../CustomNavigation';
-import HomeScreenNavigator from '../../screens/HomeScreen/CustomHomeScreenNavigation';
+import HomeScreenNavigator from '../CustomNavigation/HomeScreenNavigation';
+import PortfolioScreenNavigator from '../CustomNavigation/PortfolioScreenNavigation';
 
 const Tab = createBottomTabNavigator();
 

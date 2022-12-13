@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Alert, Pressable, StyleSheet, Text } from 'react-native';
 import { Favorites, ResultTileProps } from '../../types';
 import AsyncStorage from "@react-native-async-storage/async-storage";

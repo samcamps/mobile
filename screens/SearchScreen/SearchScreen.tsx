@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import ResultTile from '../../components/Search/ResultTile';
 import { SearchResult } from '../../types';
-import Constants from "expo-constants";
 
 const SearchScreen = () => {
 
@@ -12,7 +11,7 @@ const SearchScreen = () => {
 
     const getSearch = async () => {
 
-        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=SU7DQ25CON952VSZ`);
+        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=A7ESV77V11YJI2U0`);
         let result = await response.json();
 
         setSearchResult(result);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import { Portfolio, PortfolioItem, SearchResult, StockID } from "../../types";
+import { Portfolio, SearchResult, StockID } from "../../types";
 import ResultTileAdd from "../../components/Search/ResultTileAdd";
 
 //eerst StockID, prijs, en aantal selecteren (bijgehouden in state)
@@ -39,7 +39,7 @@ const AddScreen = () => {
 
     const getSearch = async () => {
 
-        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=SU7DQ25CON952VSZ`);
+        let response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${userInput}&apikey=A7ESV77V11YJI2U0`);
         let result = await response.json();
 
         setSearchResult(result);

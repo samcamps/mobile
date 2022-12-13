@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, Pressable } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { PortfolioItemTileProps } from '../../types';
 
 const PortfolioItemTile = ({ calculatedPortfolioItem, deletePortfolioItem }: PortfolioItemTileProps) => {
