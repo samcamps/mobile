@@ -83,7 +83,7 @@ const AddScreen = () => {
 
             await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
 
-            Alert.alert("Selectie toegevoegd aan portfolio")
+            Alert.alert("Selection added to portfolio")
         }
     };
 
@@ -91,12 +91,12 @@ const AddScreen = () => {
 
         <View style={styles.container} >
             
-            <Text style={{ fontSize: 18 }}>Voeg uw aandeel toe:</Text>
+            <Text style={{ fontSize: 18 }}>Add your stock:</Text>
 
             <View>
                 <TextInput
                     style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
-                    placeholder="Geef naam of symbool in"
+                    placeholder="Enter name or symbol"
                     onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
                 />
 
@@ -109,7 +109,7 @@ const AddScreen = () => {
             <Text style={{ fontSize: 18 }}>Voeg uw aantal toe:</Text>
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
-                placeholder="Geef aantal in"
+                placeholder="Enter number of shares"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
                 onSubmitEditing={(event) => checkandSetAantal(event.nativeEvent.text)}
@@ -125,13 +125,13 @@ const AddScreen = () => {
             />
 
             {selectedStock ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aandeel ${selectedStock?.['1. symbol']} werd geselecteerd`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aandeel ${selectedStock?.['1. symbol']} has been selected`}</Text> : null}
 
             {selectedAantal ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aantal ${selectedAantal} werd geselecteerd`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aantal ${selectedAantal} has been selected`}</Text> : null}
 
             {selectedAankoopprijs ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aankoopprijs ${selectedAankoopprijs} werd geselecteerd`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aankoopprijs ${selectedAankoopprijs} has been selected`}</Text> : null}
 
             {(selectedStock && selectedAankoopprijs && selectedAantal) ?
 
