@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { FavoritesTileProps, StockData } from '../../types';
 import { useNavigation } from "@react-navigation/native";
+import { Feather } from '@expo/vector-icons';
 
 const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
 
@@ -19,44 +20,68 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
         getStockData();
     }, []);
 
-    console.log(stockData);
-
     return (
         <View style={styles.container}>
-            <Text>{`Name: ${stockid['2. name']}`}</Text>
-            <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
-            <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
-            <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
-            <View>
+
+            <View style={styles.text}>
+                <Text>{`Name: ${stockid['2. name']}`}</Text>
+                <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
+                <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
+                <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
                 <Pressable
+                    style={styles.pressableYahoo}
                     onPress={() => {
-                        deleteFavorite(stockid);
+                        navigation.navigate("Yahoo", { symbol: stockData?.['Global Quote']['01. symbol'] })
                     }}
                 >
-                    <Text>Delete</Text>
+                    <Text>More info</Text>
                 </Pressable>
             </View>
 
-            <View style={{ alignItems: "flex-end" }}>
-                <Button title="More info" onPress={() => navigation.navigate("Yahoo", { symbol: stockData?.['Global Quote']['01. symbol'] })} />
-            </View>
+            <Pressable
+                onPress={() => {
+                    deleteFavorite(stockid);
+                }}
+            >
+                <Feather name="x" size={25} color="#5A5A5A" />
+            </Pressable>
 
         </View >
     )
 }
 
-//CSS nog aanpassen
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "column",
-        marginTop: 20,
-        marginLeft: 30,
-        marginRight: 30,
-        width: 315,
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        width: "90%",
+        alignSelf: "center",
+        borderRadius: 10,
+        maxHeight: 170,
+        marginTop: 15,
         backgroundColor: "#dedddc",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        justifyContent: 'space-between'
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+    },
+    text: {
+        flexDirection: "column",
+        width: "90%",
+    },
+    pressableYahoo: {
+        alignItems: "flex-start",
+        marginTop: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: "#bdbcbb",
+        borderRadius: 12,
+        width: 83,
+    },
+    pressable: {
+        display: "flex",
+        flexDirection: "row",
+        paddingTop: 5,
     }
 });
 

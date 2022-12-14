@@ -25,7 +25,6 @@ const HomeScreen = () => {
 
     const deleteFavorite = (stockid: StockID) => {
         const indexOfObject = favorites?.myFavorites.findIndex(item => item["1. symbol"] === stockid["1. symbol"])
-        console.log(indexOfObject);
 
         if (indexOfObject !== undefined && favorites !== undefined) {
             favorites?.myFavorites.splice(indexOfObject, 1);
@@ -60,18 +59,19 @@ const HomeScreen = () => {
     );
 }
 
-//CSS nog aanpassen
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
-        alignItems: "center",
+        backgroundColor: '#fff',
     },
     title: {
         marginTop: 20,
         fontWeight: "bold",
+        alignSelf: "center",
     },
     placeholder: {
+        alignSelf: "center",
         marginTop: 30,
     }
 });
