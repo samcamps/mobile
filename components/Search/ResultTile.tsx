@@ -1,6 +1,7 @@
 import React from 'react';
-import { Alert, Pressable, StyleSheet, Text } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Favorites, ResultTileProps } from '../../types';
+import { EvilIcons } from '@expo/vector-icons'; 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ResultTile = ({ item }: ResultTileProps) => {
@@ -18,9 +19,9 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         await getData()
 
-        let bestaatAl = favorites.myFavorites.find((el) => el['1. symbol']=== item['1. symbol']);
+        let bestaatAl = favorites.myFavorites.find((el) => el['1. symbol'] === item['1. symbol']);
 
-        if (bestaatAl){
+        if (bestaatAl) {
             Alert.alert("This stock is already in your favorites!")
         }
 
@@ -37,32 +38,47 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
     return (
 
-        <Pressable style={{
-            flexDirection: "column", flex: 1, justifyContent: 'space-between', maxHeight: 80,
-            marginTop: 20, marginLeft: 30, marginRight: 30,
-            backgroundColor: "#dedddc",
-            paddingVertical: 10, paddingHorizontal: 10
+        <View style={styles.container}>
 
-        }} delayLongPress={500}
-            onLongPress={storeData}
-        >
+            <View style={styles.text}>
+                <Text>{`Name: ${item['2. name']}`}</Text>
+                <Text>{`Symbol: ${item['1. symbol']}`}</Text>
+                <Text>{`Currency: ${item['8. currency']}`}</Text>
+                <Text>{`Region: ${item['4. region']}`}</Text>
+            </View>
 
-            <Text>{`Name: ${item['2. name']}`}</Text>
-            <Text>{`Symbol: ${item['1. symbol']}`}</Text>
-            <Text>{`Currency: ${item['8. currency']}`}</Text>
-            <Text>{`Region: ${item['4. region']}`}</Text>
-
-        </Pressable>
+            <Pressable
+                style={styles.pressable}
+                onPress={storeData}
+            >
+                <EvilIcons name="star" size={28} color="#5A5A5A" />
+            </Pressable>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        width: "90%",
+        alignSelf: "center",
+        borderRadius: 10,
+        maxHeight: 120,
+        marginTop: 15,
+        backgroundColor: "#dedddc",
+        paddingVertical: 15,
+        paddingHorizontal: 15,
     },
+    text: {
+        flexDirection: "column",
+        width: "90%",
+    },
+    pressable: {
+        display: "flex",
+        flexDirection: "row",
+        paddingTop: 5,
+    }
 });
 
 export default ResultTile;

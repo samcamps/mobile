@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { Foundation } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
 import HomeScreenNavigator from '../CustomNavigation/HomeScreenNavigation';
 import PortfolioScreenNavigator from '../CustomNavigation/PortfolioScreenNavigation';
@@ -16,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Favorites" component={HomeScreenNavigator} options={{  
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bank-transfer" size={33} color="black" />
+          tabBarIcon: ({ color, size }) => <Ionicons name="star" size={23} color="black" />
         }}
         />
         <Tab.Screen name="Search" component={SearchScreen} options={{
