@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, Button, Alert, ScrollView } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
@@ -16,15 +16,15 @@ const PortfolioScreen = () => {
     // }
     // clearAsyncStorage();
 
-    const navigation : any = useNavigation();
+    const navigation: any = useNavigation();
 
     const [portfolio, setPortfolio] = useState<Portfolio>();
     const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
-    const [marktwaarden, setMarktwaarden] = useState<number[]>([]);    
+    const [marktwaarden, setMarktwaarden] = useState<number[]>([]);
     const [aankoopwaarden, setAankoopwaarden] = useState<number[]>([]);
     const [portfolioItemDeleted, setPortfolioItemDeleted] = useState<boolean>(false);
-    //let calculatedPortfolio: CalculatedPortfolioItem[] = [];
-    const [calculatedPortfolio, setCalculatedPortfolio] = useState<CalculatedPortfolioItem[]>([]);
+    let calculatedPortfolio: CalculatedPortfolioItem[] = [];
+    // const [calculatedPortfolio, setCalculatedPortfolio] = useState<CalculatedPortfolioItem[]>([]);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -33,8 +33,8 @@ const PortfolioScreen = () => {
                 if (result !== null) {
                     setPortfolio(JSON.parse(result));
                 }
-            };            
-            getPortfolioData();            
+            };
+            getPortfolioData();
         }, [portfolioItemDeleted])
     );
 
@@ -48,7 +48,7 @@ const PortfolioScreen = () => {
 
             calculations(portfolioItem);
         }
-    }    
+    }
 
     const calculations = (portfolioItem: PortfolioItem) => {
         let marktwaarde: number = 0;
@@ -59,13 +59,13 @@ const PortfolioScreen = () => {
 
         if (currentAankoopprijs !== undefined) {
             marktwaarde = parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal);
-    
+
             aankoopprijs = parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal);
             aantal = parseFloat(portfolioItem.aantal);
-    
+
             prestatie = marktwaarde - aankoopprijs;
-            prestatiePercentage = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;  
-            
+            prestatiePercentage = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;
+
             let calculatedPortfolioItem: CalculatedPortfolioItem = {
                 symbol: portfolioItem.stockid["1. symbol"],
                 name: portfolioItem.stockid["2. name"],
@@ -75,17 +75,15 @@ const PortfolioScreen = () => {
                 prestatie: prestatie,
                 prestatiePercentage: prestatiePercentage
             }
-    
-            setCalculatedPortfolio([...calculatedPortfolio, calculatedPortfolioItem]);
+
+            calculatedPortfolio.push(calculatedPortfolioItem);
             console.log(calculatedPortfolioItem);
-        }           
-    } 
+        }
+    }
 
-    portfolio?.myPortfolio.map((portfolioItem) => {
-        getStockPrice(portfolioItem);  
-    });
-
-    console.log(`nieuwe portfolio: ${calculatedPortfolio}`);
+    // portfolio?.myPortfolio.map((portfolioItem) => {
+    //     getStockPrice(portfolioItem);
+    // });
 
     const deletePortfolioItem = (symbol: string) => {
         const indexOfObject = portfolio?.myPortfolio.findIndex(item => item.stockid["1. symbol"] === symbol)
@@ -103,23 +101,25 @@ const PortfolioScreen = () => {
     }
 
     const storeData = async () => {
-        await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));   
-        setPortfolioItemDeleted(false);     
+        await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+        setPortfolioItemDeleted(false);
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Portfolio</Text>
-            <Button title="Add stock" onPress={() => navigation.navigate("Add")}/>
-            {/* <PortfolioTotal marktwaardenArray={marktwaarden} aankoopwaardenArray={aankoopwaarden}/> */}
+            <Button title="Add stock" onPress={() => navigation.navigate("Add")} />
+            <PortfolioTotal marktwaardenArray={marktwaarden} aankoopwaardenArray={aankoopwaarden}/>
 
-            {(calculatedPortfolio === undefined || calculatedPortfolio.length == 0) ? <Text style={styles.placeholder}>U heeft nog geen portfolio samengesteld</Text>
-                : <View>                   
-                    {calculatedPortfolio.map((calculatedPortfolioItem,index) => (
-                        <PortfolioItemTile calculatedPortfolioItem={calculatedPortfolioItem} deletePortfolioItem={deletePortfolioItem} key={index} />
-                    ))}
-                </View>
-            }
+            <ScrollView>
+                {(calculatedPortfolio === undefined || calculatedPortfolio.length == 0) ? <Text style={styles.placeholder}>Build your portfolio by adding stocks</Text>
+                    : <View>
+                        {calculatedPortfolio.map((calculatedPortfolioItem, index) => (
+                            <PortfolioItemTile calculatedPortfolioItem={calculatedPortfolioItem} deletePortfolioItem={deletePortfolioItem} key={index} />
+                        ))}
+                    </View>
+                }
+            </ScrollView>
         </View>
     );
 };
@@ -127,7 +127,7 @@ const PortfolioScreen = () => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
-        flex: 1, 
+        flex: 1,
         alignItems: "center",
     },
     title: {

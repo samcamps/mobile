@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert, ScrollView } from "react-native";
 import { Favorites, StockID } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";
 import Constants from "expo-constants";
 
 const HomeScreen = () => {
-    
+
     const [favorites, setFavorites] = useState<Favorites>();
     const [favoriteDeleted, setFavoriteDeleted] = useState<boolean>(false);
 
@@ -39,21 +39,23 @@ const HomeScreen = () => {
     }
 
     const storeData = async () => {
-        await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));   
-        setFavoriteDeleted(false);     
+        await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
+        setFavoriteDeleted(false);
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Favorites</Text>
 
-            {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Zoek en voeg uw favoriete stocks toe</Text>
-                : <View>
-                    {favorites?.myFavorites.map((favorite, index) => (
-                        <FavoritesTile stockid={favorite} deleteFavorite={deleteFavorite} key={index} />
-                    ))}       
-                </View>
-            }            
+            <ScrollView>
+                {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Search and add your favorite stocks</Text>
+                    : <View>
+                        {favorites?.myFavorites.map((favorite, index) => (
+                            <FavoritesTile stockid={favorite} deleteFavorite={deleteFavorite} key={index} />
+                        ))}
+                    </View>
+                }
+            </ScrollView>
         </View>
     );
 }
