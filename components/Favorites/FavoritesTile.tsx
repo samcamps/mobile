@@ -24,8 +24,7 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
         <View style={styles.container}>
 
             <View style={styles.text}>
-                <Text>{`Name: ${stockid['2. name']}`}</Text>
-                <Text>{`Symbol: ${stockid['1. symbol']}`}</Text>
+                <Text>{`${stockid['2. name']} (${stockid['1. symbol']})`}</Text>
                 <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
                 <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
                 <Pressable
@@ -65,10 +64,11 @@ const styles = StyleSheet.create({
     },
     text: {
         flexDirection: "column",
-        width: "90%",
+        width: "85%",
+        marginRight: 17,
     },
     pressableYahoo: {
-        alignItems: "flex-start",
+        alignItems: "center",
         marginTop: 10,
         paddingTop: 5,
         paddingBottom: 5,
