@@ -29,7 +29,7 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
             favorites.myFavorites.push({ ["1. symbol"]: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })
             await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
-            Alert.alert(`${item['1. symbol']} toegevoegd aan favorieten`)
+            Alert.alert(`${item['1. symbol']} added to favorites`)
         }
         else {
             Alert.alert("Maximum number of favorites reached!")

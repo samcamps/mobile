@@ -21,7 +21,7 @@ const PortfolioTotal = ({ marktwaardenArray, aankoopwaardenArray }: PortfolioTot
 
     return (
         <View style={styles.container}>
-            <Text>{`Totale marktwaarde: ${marktwaardenSum.toFixed(3)}`}</Text>
+            <Text>{`Totale marktwaarde: ${marktwaardenSum.toFixed(3)} `}</Text>
             <Text>{`Totale aankoopwaarde: ${aankoopwaardenSum.toFixed(3)}`}</Text>
             <Text>{`Prestatie: ${prestatie.toFixed(3)}`} {isNaN(prestatiePercentage) ? <Text>(0.00%)</Text> 
                 : <Text>{`(${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>}   

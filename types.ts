@@ -83,16 +83,6 @@ export interface PortfolioItem {
 
 }
 
-export interface CalculatedPortfolioItem {
-    symbol: string,
-    name: string,
-    marktwaarde: number,
-    aankoopprijs: number,
-    aantal: number,
-    prestatie: number,
-    prestatiePercentage: number
-}
-
 export interface PortfolioTotalProps {
 
     marktwaardenArray: number[],
@@ -101,6 +91,8 @@ export interface PortfolioTotalProps {
 
 export interface PortfolioItemTileProps {
 
-    calculatedPortfolioItem: CalculatedPortfolioItem,
+    portfolioItem: PortfolioItem,
+    addMarktwaarden: (marktwaarde: number) => void,
+    addAankoopwaarden: (aankoopwaarde: number) => void,
     deletePortfolioItem: (symbol: string) => void,
 }
