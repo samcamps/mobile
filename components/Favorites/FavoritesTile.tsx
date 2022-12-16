@@ -18,7 +18,7 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
 
     useEffect(() => {
         getStockData();
-    }, []);
+    },[stockid]);
 
     return (
         <View style={styles.container}>

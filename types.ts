@@ -67,7 +67,7 @@ export interface StockID {
 export interface FavoritesTileProps {
 
     stockid: StockID,
-    deleteFavorite: (stockid: StockID) => void,
+    deleteFavorite: (stockid: StockID) => void
 }
 
 export interface Portfolio {
@@ -79,7 +79,7 @@ export interface PortfolioItem {
 
     stockid: StockID
     aankoopprijs: string,
-    aantal: string,
+    aantal: string
 
 }
 
@@ -94,5 +94,11 @@ export interface PortfolioItemTileProps {
     portfolioItem: PortfolioItem,
     addMarktwaarden: (marktwaarde: number) => void,
     addAankoopwaarden: (aankoopwaarde: number) => void,
-    deletePortfolioItem: (symbol: string) => void,
+    deletePortfolioItem: (deleteitem: DeleteItem) => void
+}
+export interface DeleteItem{
+
+    symbol: string,
+    marktwaarde: number,
+    aankoopwaarde: number
 }

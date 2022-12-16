@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Button, ScrollView, Alert } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import { Portfolio } from "../../types";
+import { DeleteItem, Portfolio, PortfolioItem } from "../../types";
 import PortfolioItemTile from "../../components/Portfolio/PortfolioItemTile";
 import PortfolioTotal from "../../components/Portfolio/PortfolioTotal";
 
@@ -21,7 +21,6 @@ const PortfolioScreen = () => {
     const [portfolio, setPortfolio] = useState<Portfolio>();
     const [marktwaarden, setMarktwaarden] = useState<number[]>([]);
     const [aankoopwaarden, setAankoopwaarden] = useState<number[]>([]);
-    const [portfolioItemDeleted, setPortfolioItemDeleted] = useState<boolean>(false);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -32,8 +31,16 @@ const PortfolioScreen = () => {
                 }
             };
             getPortfolioData();
-        }, [portfolioItemDeleted])
+        }, [])
     );
+
+    useEffect(() => {
+        const storeData = async () => {
+            await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+        };
+        storeData();
+    }, [portfolio]);
+
 
     const addMarktwaarden = (marktwaarde: number): void => {
         setMarktwaarden([...marktwaarden, marktwaarde]);
@@ -43,41 +50,38 @@ const PortfolioScreen = () => {
         setAankoopwaarden([...aankoopwaarden, aankoopwaarde]);
     }
 
-    console.log(marktwaarden);
-    console.log(aankoopwaarden);
+    const deletePortfolioItem = (deleteitem: DeleteItem) => {
 
-    const deletePortfolioItem = (symbol: string) => {
-        const indexOfObject = portfolio?.myPortfolio.findIndex(item => item.stockid["1. symbol"] === symbol)
-        console.log(indexOfObject);
+        let updatedmyPortfolio = portfolio?.myPortfolio.filter((el) => el.stockid["1. symbol"] !== deleteitem.symbol)
 
-        if (indexOfObject !== undefined && portfolio !== undefined) {
-            portfolio?.myPortfolio.splice(indexOfObject, 1);
-            setPortfolioItemDeleted(true);
-            console.log(portfolio);
-            setPortfolio(portfolio);
+        if (portfolio !== undefined && updatedmyPortfolio !== undefined) {
+
+            setPortfolio({ myPortfolio: updatedmyPortfolio })
+            Alert.alert(`${deleteitem.symbol} removed from portfolio`);
         }
+        addAankoopwaarden(deleteitem.aankoopwaarde)
+        addMarktwaarden(deleteitem.marktwaarde)
 
-        storeData();
-        Alert.alert(`${symbol} removed from portfolio`);
+        console.log(marktwaarden);
     }
 
-    const storeData = async () => {
-        await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
-        setPortfolioItemDeleted(false);
-    };
 
     return (
         <View style={styles.container}>
+
             <Text style={styles.title}>Portfolio</Text>
             <Button title="Add stock" onPress={() => navigation.navigate("Add")} />
+
             <PortfolioTotal marktwaardenArray={marktwaarden} aankoopwaardenArray={aankoopwaarden} />
 
             <ScrollView>
                 {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>Build your portfolio by adding stocks</Text>
                     : <View>
-                        {portfolio?.myPortfolio.map((portfolioItem, index) => (
-                            <PortfolioItemTile portfolioItem={portfolioItem} addMarktwaarden={addMarktwaarden} addAankoopwaarden={addAankoopwaarden} deletePortfolioItem={deletePortfolioItem} key={index} />
-                        ))}
+                        {portfolio?.myPortfolio.map((portfolioItem, index) => {
+                            
+                            return (<PortfolioItemTile portfolioItem={portfolioItem} addMarktwaarden={addMarktwaarden}
+                                addAankoopwaarden={addAankoopwaarden} deletePortfolioItem={deletePortfolioItem} key={index} />)
+                        })}
                     </View>
                 }
             </ScrollView>

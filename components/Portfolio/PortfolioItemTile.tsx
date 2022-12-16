@@ -58,8 +58,8 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
             <Pressable
                 style={styles.pressable}
                 onPress={() => {
-                    // dit moet verbeterd worden
-                    // deletePortfolioItem(portfolioItem.stockid['1. symbol']);
+                    
+                     deletePortfolioItem({symbol:portfolioItem.stockid['1. symbol'], aankoopwaarde:(aankoopprijs *-1), marktwaarde:(marktwaarde*-1)});
                 }}
             >
                 <Text>Delete</Text>

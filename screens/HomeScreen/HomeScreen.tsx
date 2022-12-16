@@ -17,6 +17,7 @@ const HomeScreen = () => {
                 let result = await AsyncStorage.getItem("storedfavs");
                 if (result !== null) {
                     setFavorites(JSON.parse(result));
+                    
                 }
             };
             getData();
