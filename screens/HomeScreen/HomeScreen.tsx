@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Alert, ScrollView } from "react-native";
 import { Favorites, StockID } from "../../types";
@@ -9,7 +9,6 @@ import Constants from "expo-constants";
 const HomeScreen = () => {
 
     const [favorites, setFavorites] = useState<Favorites>();
-    const [favoriteDeleted, setFavoriteDeleted] = useState<boolean>(false);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -20,26 +19,25 @@ const HomeScreen = () => {
                 }
             };
             getData();
-        }, [favoriteDeleted])
+        }, [])
     );
 
-    const deleteFavorite = (stockid: StockID) => {
-        const indexOfObject = favorites?.myFavorites.findIndex(item => item["1. symbol"] === stockid["1. symbol"])
-
-        if (indexOfObject !== undefined && favorites !== undefined) {
-            let updatedarray = favorites?.myFavorites.splice(indexOfObject, 1);
-            setFavoriteDeleted(true);
-            setFavorites({ myFavorites: updatedarray });
-        }
-
+    useEffect(() => {
+        const storeData = async () => {
+            await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
+        };
         storeData();
-        Alert.alert(`${stockid['1. symbol']} removed from favorites`);
-    }
+    }, [favorites]);
 
-    const storeData = async () => {
-        await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
-        setFavoriteDeleted(false);
-    };
+    const deleteFavorite = (stockid: StockID) => {
+
+        if (favorites !== undefined) {
+
+            let updatedarray = favorites?.myFavorites.filter((el) => el["1. symbol"] !== stockid["1. symbol"])
+            setFavorites({ myFavorites: updatedarray });
+            Alert.alert(`${stockid['1. symbol']} removed from favorites`);
+        }
+    }
 
     return (
         <View style={styles.container}>
