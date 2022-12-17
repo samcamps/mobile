@@ -36,7 +36,8 @@ const PortfolioScreen = () => {
 
     useEffect(() => {
         const storeData = async () => {
-            await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+            try{await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));}
+            catch (error) { }
         };
         storeData();
     }, [portfolio]);
@@ -61,8 +62,6 @@ const PortfolioScreen = () => {
         }
         addAankoopwaarden(deleteitem.aankoopwaarde)
         addMarktwaarden(deleteitem.marktwaarde)
-
-        console.log(marktwaarden);
     }
 
     console.log(marktwaarden);

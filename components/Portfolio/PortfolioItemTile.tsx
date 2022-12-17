@@ -9,13 +9,10 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     const [aankoopprijs, setAankoopprijs] = useState<number>(0);
     const [prestatie, setPrestatie] = useState<number>(0);
     const [prestatiePercentage, setPrestatiePercentage] = useState<number>(0);
-    
 
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
-
-        
 
         if (portfolioItem !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${portfolioItem.stockid['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
@@ -26,8 +23,6 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
             calculations()
             console.log("calc done")
         }
-        
-        console.log("klaar")
     }
 
     useEffect(() => {
@@ -36,12 +31,10 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
 
     useEffect(() => {
         addMarktwaarden(marktwaarde);
-
     }, [marktwaarde]);
 
     useEffect(() => {
         addAankoopwaarden(aankoopprijs);
-
     }, [aankoopprijs]);
 
 
@@ -59,7 +52,7 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
             symbol = "+";
         }
     }
-
+console.log('vlak voor return')
     return (
         <View style={styles.container}>
             <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
@@ -80,7 +73,6 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
 
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({

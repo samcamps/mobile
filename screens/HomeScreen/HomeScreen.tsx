@@ -24,8 +24,9 @@ const HomeScreen = () => {
 
     useEffect(() => {
         const storeData = async () => {
-            await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites));
-        };
+            try { await AsyncStorage.setItem("storedfavs", JSON.stringify(favorites)); }
+            catch (error) { };
+        }
         storeData();
     }, [favorites]);
 
