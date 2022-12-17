@@ -9,14 +9,13 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     const [aankoopprijs, setAankoopprijs] = useState<number>(0);
     const [prestatie, setPrestatie] = useState<number>(0);
     const [prestatiePercentage, setPrestatiePercentage] = useState<number>(0);
-    const [ready, setReady] = useState<boolean>(false)
-
+    
 
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
 
-        setReady(false)
+        
 
         if (portfolioItem !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${portfolioItem.stockid['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
@@ -27,7 +26,7 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
             calculations()
             console.log("calc done")
         }
-        setReady(true)
+        
         console.log("klaar")
     }
 
@@ -61,31 +60,27 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
         }
     }
 
-    if (ready) {
-        return (
-            <View style={styles.container}>
-                <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-                <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-                <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-                <Text>{`Prestatie: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
-                <Text>{`Aantal: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
+    return (
+        <View style={styles.container}>
+            <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
+            <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+            <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+            <Text>{`Prestatie: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
+            <Text>{`Aantal: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
 
-                <Pressable
-                    style={styles.pressable}
-                    onPress={() => {
+            <Pressable
+                style={styles.pressable}
+                onPress={() => {
 
-                        deletePortfolioItem({ symbol: portfolioItem.stockid['1. symbol'], aankoopwaarde: (aankoopprijs * -1), marktwaarde: (marktwaarde * -1) });
-                    }}
-                >
-                    <Text>Delete</Text>
-                </Pressable>
+                    deletePortfolioItem({ symbol: portfolioItem.stockid['1. symbol'], aankoopwaarde: (aankoopprijs * -1), marktwaarde: (marktwaarde * -1) });
+                }}
+            >
+                <Text>Delete</Text>
+            </Pressable>
 
-            </View>
-        )
-    }
-    else {
-        return null
-    }
+        </View>
+    )
+
 }
 
 const styles = StyleSheet.create({
