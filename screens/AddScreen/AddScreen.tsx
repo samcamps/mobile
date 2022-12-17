@@ -91,7 +91,7 @@ const AddScreen = () => {
 
         <View style={styles.container} >
             
-            <Text style={{ fontSize: 18 }}>Add your stock:</Text>
+            <Text style={{ fontSize: 18 }}>Search your stock:</Text>
 
             <View>
                 <TextInput
@@ -101,37 +101,37 @@ const AddScreen = () => {
                 />
 
                 {searchResult === undefined || searchResult['Error Message'] ? null
-                    : searchResult.bestMatches.length === 0 ? <Text style={{ marginLeft: 10, marginTop: 20 }}>Geen zoekresultaat</Text>
+                    : searchResult.bestMatches.length === 0 ? <Text style={{ marginLeft: 10, marginTop: 20 }}>No search result</Text>
                         : searchResult.bestMatches.slice(0, 1).map((el, index) => <ResultTileAdd item={el} key={index} onAddID={setSelectedStock} />)
                 }
             </View>
 
-            <Text style={{ fontSize: 18 }}>Voeg uw aantal toe:</Text>
+            <Text style={{ fontSize: 18 }}>Add your number of shares:</Text>
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
                 placeholder="Enter number of shares"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                onSubmitEditing={(event) => checkandSetAantal(event.nativeEvent.text)}
+                onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
             />
-            <Text style={{ fontSize: 18 }}>Voeg uw aankoopprijs toe:</Text>
+            <Text style={{ fontSize: 18 }}>Add buying price:</Text>
             <TextInput
                 style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                placeholder={selectedStock ? `Actuele prijs: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
+                placeholder={selectedStock ? `Current price: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
                 placeholderTextColor="#444444"
-                onSubmitEditing={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
+                onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
             />
 
             {selectedStock ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aandeel ${selectedStock?.['1. symbol']} has been selected`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Stock ${selectedStock?.['1. symbol']} has been selected`}</Text> : null}
 
             {selectedAantal ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aantal ${selectedAantal} has been selected`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`${selectedAantal} shares have been selected`}</Text> : null}
 
             {selectedAankoopprijs ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Aankoopprijs ${selectedAankoopprijs} has been selected`}</Text> : null}
+                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`${selectedAankoopprijs} as buying price has been selected`}</Text> : null}
 
             {(selectedStock && selectedAankoopprijs && selectedAantal) ?
 
