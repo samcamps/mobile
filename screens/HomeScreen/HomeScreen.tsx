@@ -17,7 +17,6 @@ const HomeScreen = () => {
                 let result = await AsyncStorage.getItem("storedfavs");
                 if (result !== null) {
                     setFavorites(JSON.parse(result));
-                    
                 }
             };
             getData();
@@ -28,10 +27,9 @@ const HomeScreen = () => {
         const indexOfObject = favorites?.myFavorites.findIndex(item => item["1. symbol"] === stockid["1. symbol"])
 
         if (indexOfObject !== undefined && favorites !== undefined) {
-            favorites?.myFavorites.splice(indexOfObject, 1);
+            let updatedarray = favorites?.myFavorites.splice(indexOfObject, 1);
             setFavoriteDeleted(true);
-            console.log(favorites);
-            setFavorites(favorites);
+            setFavorites({ myFavorites: updatedarray });
         }
 
         storeData();

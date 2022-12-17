@@ -4,69 +4,88 @@ import { PortfolioItemTileProps } from '../../types';
 
 const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, deletePortfolioItem }: PortfolioItemTileProps) => {
 
-    //namen variabelen omzetten naar Engels
-    const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
+    // const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
+    const [marktwaarde, setMarktwaarde] = useState<number>(0);
+    const [aankoopprijs, setAankoopprijs] = useState<number>(0);
+    const [prestatie, setPrestatie] = useState<number>(0);
+    const [prestatiePercentage, setPrestatiePercentage] = useState<number>(0);
+    const [ready, setReady] = useState<boolean>(false)
+
+
+    let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
+
+        setReady(false)
 
         if (portfolioItem !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${portfolioItem.stockid['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
             let result = await response.json();
 
-            setCurrentAankoopprijs(result['Global Quote']['05. price'])
+            currentAankoopprijs = result['Global Quote']['05. price']
+            console.log(currentAankoopprijs)
+            calculations()
+            console.log("calc done")
         }
+        setReady(true)
+        console.log("klaar")
     }
 
     useEffect(() => {
         getStockPrice();
-    }, []);
+    }, [portfolioItem]);
 
-    let marktwaarde: number = 0;
-    let aankoopprijs: number = 0;
-    let aantal: number = 0;
-    let prestatie: number = 0;
-    let prestatiePercentage: number = 0;
+    useEffect(() => {
+        addMarktwaarden(marktwaarde);
+
+    }, [marktwaarde]);
+
+    useEffect(() => {
+        addAankoopwaarden(aankoopprijs);
+
+    }, [aankoopprijs]);
+
+
     let symbol: string = "";
 
-    if (currentAankoopprijs !== undefined) {
-        marktwaarde = parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal);
+    const calculations = () => {
+        if (currentAankoopprijs !== undefined) {
 
-        aankoopprijs = parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal);
-        aantal = parseFloat(portfolioItem.aantal);
-
-        prestatie = marktwaarde - aankoopprijs;
-        prestatiePercentage = ((marktwaarde - aankoopprijs) / aankoopprijs) * 100;
-        if (prestatiePercentage > 0) {
+            setMarktwaarde(parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal));
+            setAankoopprijs(parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal));
+            setPrestatie((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal)));
+            setPrestatiePercentage(((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) / parseFloat(portfolioItem.aankoopprijs) * 100);
+        }
+        if (((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) > 0) {
             symbol = "+";
         }
     }
 
-    useEffect(() => {
-        addMarktwaarden(marktwaarde);
-        addAankoopwaarden(aankoopprijs);
-    }, [marktwaarde, aankoopprijs]);
-       
+    if (ready) {
+        return (
+            <View style={styles.container}>
+                <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
+                <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                <Text>{`Prestatie: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
+                <Text>{`Aantal: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
 
-    return (
-        <View style={styles.container}>
-            <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-            <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{`Prestatie: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
-            <Text>{`Aantal: ${aantal.toFixed(3)}`}</Text>
+                <Pressable
+                    style={styles.pressable}
+                    onPress={() => {
 
-            <Pressable
-                style={styles.pressable}
-                onPress={() => {
-                    
-                     deletePortfolioItem({symbol:portfolioItem.stockid['1. symbol'], aankoopwaarde:(aankoopprijs *-1), marktwaarde:(marktwaarde*-1)});
-                }}
-            >
-                <Text>Delete</Text>
-            </Pressable>
+                        deletePortfolioItem({ symbol: portfolioItem.stockid['1. symbol'], aankoopwaarde: (aankoopprijs * -1), marktwaarde: (marktwaarde * -1) });
+                    }}
+                >
+                    <Text>Delete</Text>
+                </Pressable>
 
-        </View>
-    )
+            </View>
+        )
+    }
+    else {
+        return null
+    }
 }
 
 const styles = StyleSheet.create({
