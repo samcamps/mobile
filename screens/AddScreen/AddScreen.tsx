@@ -79,18 +79,39 @@ const AddScreen = () => {
 
             await getPortfolioData()
 
-            portfolio.myPortfolio.push({ stockid: selectedStock, aantal: selectedAantal, aankoopprijs: selectedAankoopprijs })
+            let bestaatAl = portfolio.myPortfolio.findIndex((el) => el.stockid['1. symbol'] === selectedStock["1. symbol"]);
+
+            if (bestaatAl === -1) {
+                portfolio.myPortfolio.push({ stockid: selectedStock, aantal: selectedAantal, aankoopprijs: selectedAankoopprijs })
+                Alert.alert("Selection added to portfolio")
+            }
+
+            else {
+
+                //update het bestaande stock met nieuwe prijs en nieuwe aantal
+                let newAantal:number = parseFloat(portfolio.myPortfolio[bestaatAl].aantal) + parseFloat(selectedAantal)           
+                let oldTotal:number = parseFloat(portfolio.myPortfolio[bestaatAl].aankoopprijs) * parseFloat(portfolio.myPortfolio[bestaatAl].aantal)
+                let newTotal:number = parseFloat(selectedAankoopprijs) * parseFloat(selectedAantal)
+                let newPrice:number = (oldTotal + newTotal) / newAantal
+
+                
+                portfolio.myPortfolio[bestaatAl] = {
+                    ...portfolio.myPortfolio[bestaatAl],
+                    aantal: newAantal.toString(),
+                    aankoopprijs: newPrice.toString()
+                }
+                Alert.alert(`Stock ${portfolio.myPortfolio[bestaatAl].stockid["1. symbol"]} has been updated`)
+            }
 
             await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
 
-            Alert.alert("Selection added to portfolio")
         }
     };
 
     return (
 
         <View style={styles.container} >
-            
+
             <Text style={{ fontSize: 18 }}>Search your stock:</Text>
 
             <View>
@@ -121,7 +142,7 @@ const AddScreen = () => {
                 returnKeyType="done"
                 placeholder={selectedStock ? `Current price: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
                 placeholderTextColor="#444444"
-                onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
+                onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
             />
 
             {selectedStock ?

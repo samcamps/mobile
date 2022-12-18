@@ -65,6 +65,7 @@ const PortfolioScreen = () => {
     }
 
     console.log(marktwaarden);
+    
     return (
         <View style={styles.container}>
 

@@ -10,6 +10,7 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     const [prestatie, setPrestatie] = useState<number>(0);
     const [prestatiePercentage, setPrestatiePercentage] = useState<number>(0);
 
+
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
@@ -20,7 +21,7 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
 
             currentAankoopprijs = result['Global Quote']['05. price']
             console.log(currentAankoopprijs)
-            calculations()
+            await calculations()
             console.log("calc done")
         }
     }
@@ -38,28 +39,25 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     }, [aankoopprijs]);
 
 
-    let symbol: string = "";
-
-    const calculations = () => {
+    const calculations = async () => {
         if (currentAankoopprijs !== undefined) {
 
             setMarktwaarde(parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal));
             setAankoopprijs(parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal));
             setPrestatie((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal)));
-            setPrestatiePercentage(((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) / parseFloat(portfolioItem.aankoopprijs) * 100);
-        }
-        if (((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) > 0) {
-            symbol = "+";
+            setPrestatiePercentage(((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) / (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal)) * 100);
+
         }
     }
-console.log('vlak voor return')
+
     return (
         <View style={styles.container}>
+
             <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-            <Text>{`Marktwaarde: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{`Aankoopprijs: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{`Prestatie: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${symbol} ${prestatiePercentage.toFixed(3)}%)`}</Text>
-            <Text>{`Aantal: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
+            <Text>{`Number of stocks: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
+            <Text>{`Amount invested: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+            <Text>{`Current value: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+            <Text>{prestatiePercentage > 0 ? `Performance: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (+${prestatiePercentage.toFixed(3)}%)` : `Performance: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${prestatiePercentage.toFixed(3)}%)`}</Text>
 
             <Pressable
                 style={styles.pressable}
