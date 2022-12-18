@@ -14,14 +14,14 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
-
+        console.log('fire')
         if (portfolioItem !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${portfolioItem.stockid['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
             let result = await response.json();
 
             currentAankoopprijs = result['Global Quote']['05. price']
             console.log(currentAankoopprijs)
-            await calculations()
+            calculations()
             console.log("calc done")
         }
     }
@@ -39,14 +39,13 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
     }, [aankoopprijs]);
 
 
-    const calculations = async () => {
+    const calculations = () => {
         if (currentAankoopprijs !== undefined) {
 
             setMarktwaarde(parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal));
             setAankoopprijs(parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal));
             setPrestatie((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal)));
             setPrestatiePercentage(((parseFloat(currentAankoopprijs) * parseFloat(portfolioItem.aantal)) - (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal))) / (parseFloat(portfolioItem.aankoopprijs) * parseFloat(portfolioItem.aantal)) * 100);
-
         }
     }
 
