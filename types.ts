@@ -83,22 +83,8 @@ export interface PortfolioItem {
 
 }
 
-export interface PortfolioTotalProps {
-
-    marktwaardenArray: number[],
-    aankoopwaardenArray: number[],
-}
-
 export interface PortfolioItemTileProps {
 
     portfolioItem: PortfolioItem,
-    addMarktwaarden: (marktwaarde: number) => void,
-    addAankoopwaarden: (aankoopwaarde: number) => void,
-    deletePortfolioItem: (deleteitem: DeleteItem) => void
-}
-export interface DeleteItem{
-
-    symbol: string,
-    marktwaarde: number,
-    aankoopwaarde: number
+    deletePortfolioItem: (deleteitem: StockID) => void
 }

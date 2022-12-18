@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, Pressable } from "react-native";
 import { PortfolioItemTileProps } from '../../types';
 
-const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, deletePortfolioItem }: PortfolioItemTileProps) => {
+const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItemTileProps) => {
 
     // const [currentAankoopprijs, setCurrentAankoopprijs] = useState<string>();
     const [marktwaarde, setMarktwaarde] = useState<number>(0);
@@ -30,15 +30,6 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
         getStockPrice();
     }, [portfolioItem]);
 
-    useEffect(() => {
-        addMarktwaarden(marktwaarde);
-    }, [marktwaarde]);
-
-    useEffect(() => {
-        addAankoopwaarden(aankoopprijs);
-    }, [aankoopprijs]);
-
-
     const calculations = () => {
         if (currentAankoopprijs !== undefined) {
 
@@ -62,7 +53,7 @@ const PortfolioItemTile = ({ portfolioItem, addMarktwaarden, addAankoopwaarden, 
                 style={styles.pressable}
                 onPress={() => {
 
-                    deletePortfolioItem({ symbol: portfolioItem.stockid['1. symbol'], aankoopwaarde: (aankoopprijs * -1), marktwaarde: (marktwaarde * -1) });
+                    deletePortfolioItem(portfolioItem.stockid);
                 }}
             >
                 <Text>Delete</Text>
