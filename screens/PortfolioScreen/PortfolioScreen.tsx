@@ -66,7 +66,7 @@ const PortfolioScreen = () => {
                     <Text style={styles.pressableText}>Add stock</Text>
                 </Pressable>
 
-            <ScrollView>
+            <ScrollView style={styles.portfolioItemContainer}>
                 {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>Build your portfolio by adding stocks</Text>
                     : <View>
                         {portfolio?.myPortfolio.map((portfolioItem, index) => {
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
-        alignItems: "center",
     },
     title: {
         marginTop: 20,
@@ -98,9 +97,10 @@ const styles = StyleSheet.create({
     },
     pressable: {
         marginTop: 20,
+        marginBottom: 20,
         height: 40,
-        width: "35%",
-        borderRadius: 50        ,
+        width: "30%",
+        borderRadius: 50,
         alignSelf: "center",
         color: "white",
         backgroundColor: "#3f75a2",
@@ -110,6 +110,10 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         paddingTop: 10,
         fontSize: 16,
+    },
+    portfolioItemContainer: {
+        borderTopColor: "darkgrey",
+        borderTopWidth: 1,
     }
 });
 

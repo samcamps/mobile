@@ -42,12 +42,35 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
 
     return (
         <View style={styles.container}>
+            
+            <Text style={styles.company}>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
+            <View style={styles.info}>
+                <Text style={styles.title}>Number of stocks: </Text>
+                <Text style={styles.value}>{parseFloat(portfolioItem.aantal).toFixed(3)}</Text>
+            </View>
+            <View style={styles.info}>
+                <Text style={styles.title}>Amount invested: </Text>
+                <Text style={styles.value}>{aankoopprijs.toFixed(3)} {portfolioItem.stockid['8. currency']}</Text>
+            </View>
+            <View style={styles.info}>
+                <Text style={styles.title}>Current value: </Text>
+                <Text style={styles.value}>{marktwaarde.toFixed(3)} {portfolioItem.stockid['8. currency']}</Text>
+            </View>
+            <View style={styles.info}>
+                <Text style={styles.title}>Performance: </Text>
+                <Text style={styles.value}>
+                    {prestatiePercentage > 0 ?
+                        <View style={styles.performance}>
+                            <Text style={{ color: "green" }}>{`${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "green" }}>{`+${prestatiePercentage.toFixed(3)}%`}</Text>
+                        </View>
 
-            <Text>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
-            <Text>{`Number of stocks: ${parseFloat(portfolioItem.aantal).toFixed(3)}`}</Text>
-            <Text>{`Amount invested: ${aankoopprijs.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{`Current value: ${marktwaarde.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-            <Text>{prestatiePercentage > 0 ? `Performance: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (+${prestatiePercentage.toFixed(3)}%)` : `Performance: ${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']} (${prestatiePercentage.toFixed(3)}%)`}</Text>
+                        : <View style={styles.performance}>
+                            <Text style={{ color: "red" }}>{`${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "red", }}>{`${prestatiePercentage.toFixed(3)}%`}</Text>
+                        </View>}
+                </Text>
+            </View>
 
             <Pressable
                 style={styles.pressable}
@@ -66,17 +89,36 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
 const styles = StyleSheet.create({
     container: {
         flexDirection: "column",
-        marginTop: 20,
-        marginLeft: 30,
-        marginRight: 30,
-        width: 315,
-        backgroundColor: "#dedddc",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        justifyContent: 'space-between'
+        width: "100%",
+        alignSelf: "center",
+        marginTop: 12,
+        borderBottomColor: "darkgrey",
+        borderBottomWidth: 1,
+        paddingBottom: 12,
+
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    text: {
+    },
+    company: {
+        paddingBottom: 5,
+    },
+    info: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    title: {
+    },
+    value: {
+    },
+    performance: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end"
     },
     pressable: {
-        marginTop: 20,
     }
 });
 
