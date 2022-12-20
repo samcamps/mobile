@@ -56,7 +56,6 @@ const PortfolioScreen = () => {
         <View style={styles.container}>
 
             <Text style={styles.title}>Portfolio</Text>
-
             <Pressable
                     style={styles.pressable}
                     onPress={() => {
@@ -85,6 +84,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
+        backgroundColor: '#fff',
     },
     title: {
         marginTop: 20,

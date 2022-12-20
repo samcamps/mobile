@@ -42,7 +42,7 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
 
     return (
         <View style={styles.container}>
-            
+
             <Text style={styles.company}>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
             <View style={styles.info}>
                 <Text style={styles.title}>Number of stocks: </Text>
@@ -99,8 +99,6 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
-    text: {
-    },
     company: {
         paddingBottom: 5,
     },
@@ -119,6 +117,14 @@ const styles = StyleSheet.create({
         alignItems: "flex-end"
     },
     pressable: {
+        alignItems: "center",
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: "#bdbcbb",
+        borderRadius: 15,
+        width: 70,
     }
 });
 

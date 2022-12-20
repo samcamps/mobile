@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: "#bdbcbb",
-        borderRadius: 12,
+        borderRadius: 15,
         width: 83,
     },
     pressable: {
