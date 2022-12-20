@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, ScrollView, Alert } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView, Alert, Pressable } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
@@ -56,7 +56,15 @@ const PortfolioScreen = () => {
         <View style={styles.container}>
 
             <Text style={styles.title}>Portfolio</Text>
-            <Button title="Add stock" onPress={() => navigation.navigate("Add")} />
+
+            <Pressable
+                    style={styles.pressable}
+                    onPress={() => {
+                        navigation.navigate("Add")
+                    }}
+                >
+                    <Text style={styles.pressableText}>Add stock</Text>
+                </Pressable>
 
             <ScrollView>
                 {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>Build your portfolio by adding stocks</Text>
@@ -82,9 +90,26 @@ const styles = StyleSheet.create({
     title: {
         marginTop: 20,
         fontWeight: "bold",
+        alignSelf: "center",
     },
     placeholder: {
+        alignSelf: "center",
+        marginTop: 30,
+    },
+    pressable: {
         marginTop: 20,
+        height: 40,
+        width: "35%",
+        borderRadius: 50        ,
+        alignSelf: "center",
+        color: "white",
+        backgroundColor: "#3f75a2",
+    },
+    pressableText: {
+        color: "white",
+        alignSelf: "center",
+        paddingTop: 10,
+        fontSize: 16,
     }
 });
 
