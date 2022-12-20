@@ -89,12 +89,11 @@ const AddScreen = () => {
             else {
 
                 //update het bestaande stock met nieuwe prijs en nieuwe aantal
-                let newAantal:number = parseFloat(portfolio.myPortfolio[bestaatAl].aantal) + parseFloat(selectedAantal)           
-                let oldTotal:number = parseFloat(portfolio.myPortfolio[bestaatAl].aankoopprijs) * parseFloat(portfolio.myPortfolio[bestaatAl].aantal)
-                let newTotal:number = parseFloat(selectedAankoopprijs) * parseFloat(selectedAantal)
-                let newPrice:number = (oldTotal + newTotal) / newAantal
+                let newAantal: number = parseFloat(portfolio.myPortfolio[bestaatAl].aantal) + parseFloat(selectedAantal)
+                let oldTotal: number = parseFloat(portfolio.myPortfolio[bestaatAl].aankoopprijs) * parseFloat(portfolio.myPortfolio[bestaatAl].aantal)
+                let newTotal: number = parseFloat(selectedAankoopprijs) * parseFloat(selectedAantal)
+                let newPrice: number = (oldTotal + newTotal) / newAantal
 
-                
                 portfolio.myPortfolio[bestaatAl] = {
                     ...portfolio.myPortfolio[bestaatAl],
                     aantal: newAantal.toString(),
@@ -112,71 +111,112 @@ const AddScreen = () => {
 
         <View style={styles.container} >
 
-            <Text style={{ fontSize: 18 }}>Search your stock:</Text>
+            <Text style={styles.label}>Search the stock</Text>
 
             <View>
                 <TextInput
-                    style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
+                    style={styles.textInput}
                     placeholder="Enter name or symbol"
+                    placeholderTextColor="#5A5A5A"
                     onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
                 />
 
                 {searchResult === undefined || searchResult['Error Message'] ? null
-                    : searchResult.bestMatches.length === 0 ? <Text style={{ marginLeft: 10, marginTop: 20 }}>No search result</Text>
+                    : searchResult.bestMatches.length === 0 ? <Text style={styles.placeholder}>No search result</Text>
                         : searchResult.bestMatches.slice(0, 1).map((el, index) => <ResultTileAdd item={el} key={index} onAddID={setSelectedStock} />)
                 }
             </View>
 
-            <Text style={{ fontSize: 18 }}>Add your number of shares:</Text>
+            <Text style={styles.label}>Add the number of shares</Text>
             <TextInput
-                style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
+                style={styles.textInput}
                 placeholder="Enter number of shares"
+                placeholderTextColor="#5A5A5A"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
                 onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
             />
-            <Text style={{ fontSize: 18 }}>Add buying price:</Text>
+            <Text style={styles.label}>Add the buying price</Text>
             <TextInput
-                style={{ height: 40, width: 315, borderColor: "gray", borderWidth: 1, marginLeft: 10 }}
+                style={styles.textInput}
                 keyboardType="decimal-pad"
                 returnKeyType="done"
                 placeholder={selectedStock ? `Current price: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
-                placeholderTextColor="#444444"
+                placeholderTextColor="#5A5A5A"
                 onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
             />
 
-            {selectedStock ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`Stock ${selectedStock?.['1. symbol']} has been selected`}</Text> : null}
+            <View style={styles.confirmationContainer}>
+                {selectedStock ?
+                    <Text style={styles.confirmationText}>{`Stock ${selectedStock?.['1. symbol']} has been selected`}</Text> : null}
 
-            {selectedAantal ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`${selectedAantal} shares have been selected`}</Text> : null}
+                {selectedAantal ?
+                    <Text style={styles.confirmationText}>{`${selectedAantal} shares have been selected`}</Text> : null}
 
-            {selectedAankoopprijs ?
-                <Text style={{ alignSelf: "flex-start", marginLeft: 30, marginTop: 10 }}>{`${selectedAankoopprijs} as buying price has been selected`}</Text> : null}
+                {selectedAankoopprijs ?
+                    <Text style={styles.confirmationText}>{`${selectedAankoopprijs} as buying price has been selected`}</Text> : null}
 
-            {(selectedStock && selectedAankoopprijs && selectedAantal) ?
+                {(selectedStock && selectedAankoopprijs && selectedAantal) ?
 
-                <Pressable style={{
-                    flexDirection: "column", flex: 1, justifyContent: 'space-between', maxHeight: 40,
-                    marginTop: 20, marginLeft: 10, marginRight: 10,
-                    backgroundColor: "#dedddc",
-                    paddingVertical: 10, paddingHorizontal: 10
-                }} onPress={storePortfolioItem}
+                    <Pressable
+                        style={styles.pressable}
+                        onPress={storePortfolioItem}
+                    >
+                        <Text style={styles.pressableText}>Save to portfolio</Text>
+                    </Pressable> : null
+                }
+            </View>
 
-                >
-                    <Text>Save to portfolio</Text>
-                </Pressable> : null
-            }
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
-        alignItems: "center",
+        backgroundColor: '#fff',
+    },
+    label: {
+        marginLeft: 25,
+        marginBottom: 7,
+    },
+    textInput: {
+        height: 40,
+        width: "90%",
+        borderRadius: 10,
+        borderColor: "lightgrey",
+        borderWidth: 1,
+        alignSelf: "center",
+        paddingLeft: 15,
+        marginBottom: 30,
+    },
+    placeholder: {
+        alignSelf: "center",
+        marginTop: 20,
+        marginBottom: 40,
+    },
+    confirmationContainer: {
+        marginTop: 0,
+    },
+    confirmationText: {
+        alignSelf: "flex-start",
+        marginLeft: 25,
+        marginBottom: 7,
+    },
+    pressable: {
+        marginTop: 20,
+        height: 40,
+        width: 160,
+        borderRadius: 50,
+        alignSelf: "center",
+        backgroundColor: "#3f75a2",
+    },
+    pressableText: {
+        color: "white",
+        alignSelf: "center",
+        paddingTop: 10,
+        fontSize: 16,
     }
 });
 

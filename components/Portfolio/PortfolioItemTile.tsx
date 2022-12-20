@@ -10,7 +10,6 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
     const [prestatie, setPrestatie] = useState<number>(0);
     const [prestatiePercentage, setPrestatiePercentage] = useState<number>(0);
 
-
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
@@ -79,7 +78,7 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
                     deletePortfolioItem(portfolioItem.stockid);
                 }}
             >
-                <Text>Delete</Text>
+                <Text>Hold to delete</Text>
             </Pressable>
 
         </View>
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
         borderBottomColor: "darkgrey",
         borderBottomWidth: 1,
         paddingBottom: 12,
-
         paddingLeft: 20,
         paddingRight: 20,
     },
@@ -122,9 +120,10 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: "#bdbcbb",
+        borderColor: "#bdbcbb",
+        borderWidth: 1,
         borderRadius: 15,
-        width: 70,
+        width: 120,
     }
 });
 

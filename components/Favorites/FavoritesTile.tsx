@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     text: {
-        flexDirection: "column",
         width: "85%",
         marginRight: 17,
     },
@@ -79,8 +78,6 @@ const styles = StyleSheet.create({
         width: 83,
     },
     pressable: {
-        display: "flex",
-        flexDirection: "row",
         paddingTop: 5,
     }
 });
