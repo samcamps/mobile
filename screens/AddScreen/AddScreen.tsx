@@ -24,7 +24,7 @@ const AddScreen = () => {
 
         let toCheck: number = parseFloat(input.replace(",", "."))
         if (isNaN(toCheck)) {
-            Alert.alert("This is not a number!");
+            Alert.alert("Please enter a valid amount!");
         } else {
             setSelectedAantal(toCheck.toString())
         }
@@ -35,10 +35,9 @@ const AddScreen = () => {
         let toCheck: number = parseFloat(input.replace(",", "."))
         console.log(toCheck)
         if (isNaN(toCheck)) {
-            Alert.alert("This is not a number!");
+            Alert.alert("PLease enter a valid price!");
         } else {
             setSelectedAankoopprijs(toCheck.toString())
-
         }
     }
 
@@ -81,7 +80,7 @@ const AddScreen = () => {
 
             await getPortfolioData()
 
-            let bestaatAl = portfolio.myPortfolio.findIndex((el) => el.stockid['1. symbol'] === selectedStock["1. symbol"]);
+            let bestaatAl: number = portfolio.myPortfolio.findIndex((el) => el.stockid['1. symbol'] === selectedStock["1. symbol"]);
 
             if (bestaatAl === -1) {
                 portfolio.myPortfolio.push({ stockid: selectedStock, aantal: selectedAantal, aankoopprijs: selectedAankoopprijs })
