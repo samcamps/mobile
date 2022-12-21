@@ -43,28 +43,28 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
             <Text style={styles.company}>{`${portfolioItem.stockid['2. name']} (${portfolioItem.stockid['1. symbol']})`}</Text>
             <View style={styles.info}>
                 <Text style={styles.title}>Number of stocks: </Text>
-                <Text style={styles.value}>{parseFloat(portfolioItem.aantal).toFixed(3)}</Text>
+                <Text style={styles.value}>{parseFloat(portfolioItem.aantal).toFixed(2)}</Text>
             </View>
             <View style={styles.info}>
                 <Text style={styles.title}>Amount invested: </Text>
-                <Text style={styles.value}>{aankoopprijs.toFixed(3)} {portfolioItem.stockid['8. currency']}</Text>
+                <Text style={styles.value}>{aankoopprijs.toFixed(2)} {portfolioItem.stockid['8. currency']}</Text>
             </View>
             <View style={styles.info}>
                 <Text style={styles.title}>Current value: </Text>
-                <Text style={styles.value}>{marktwaarde.toFixed(3)} {portfolioItem.stockid['8. currency']}</Text>
+                <Text style={styles.value}>{marktwaarde.toFixed(2)} {portfolioItem.stockid['8. currency']}</Text>
             </View>
             <View style={styles.info}>
                 <Text style={styles.title}>Performance: </Text>
                 <Text style={styles.value}>
                     {prestatiePercentage > 0 ?
                         <View style={styles.performance}>
-                            <Text style={{ color: "green" }}>{`${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-                            <Text style={{ color: "green" }}>{`+${prestatiePercentage.toFixed(3)}%`}</Text>
+                            <Text style={{ color: "green" }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "green" }}>{`+${prestatiePercentage.toFixed(2)}%`}</Text>
                         </View>
 
                         : <View style={styles.performance}>
-                            <Text style={{ color: "red" }}>{`${prestatie.toFixed(3)} ${portfolioItem.stockid['8. currency']}`}</Text>
-                            <Text style={{ color: "red", }}>{`${prestatiePercentage.toFixed(3)}%`}</Text>
+                            <Text style={{ color: "red" }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "red", }}>{`${prestatiePercentage.toFixed(2)}%`}</Text>
                         </View>}
                 </Text>
             </View>

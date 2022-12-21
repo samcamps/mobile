@@ -24,7 +24,7 @@ const AddScreen = () => {
 
         let toCheck: number = parseFloat(input.replace(",", "."))
         if (isNaN(toCheck)) {
-            Alert.alert("Please enter a valid amount!");
+            Alert.alert("Please enter a valid number");
         } else {
             setSelectedAantal(toCheck.toString())
         }
@@ -35,7 +35,7 @@ const AddScreen = () => {
         let toCheck: number = parseFloat(input.replace(",", "."))
         console.log(toCheck)
         if (isNaN(toCheck)) {
-            Alert.alert("PLease enter a valid price!");
+            Alert.alert("Please enter a valid price");
         } else {
             setSelectedAankoopprijs(toCheck.toString())
         }
