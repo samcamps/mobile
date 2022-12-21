@@ -8,7 +8,8 @@ import ResultTileAdd from "../../components/Search/ResultTileAdd";
 //eerst StockID, prijs, en aantal selecteren (bijgehouden in state)
 //setten van selectedStock (StockID) gebeurt door de set-functie door te geven naar de ResultTileAdd en bij longPress op een result
 //currentAankooprijs wordt gefetched en getoond, maar uiteindelijke aankoopprijs wordt in selectedAankoopprijs gezet
-//opt einde pas het gehele Portfolio-object wegschrijven naar Local Storage
+//aantal en aankoopprijs zijn onChange, pas wanneer ze uit focus (onBlur) gaan wordt de input gevalideerd en nogmaals geset
+//opt einde pas het gehele Portfolio-object wegschrijven naar Local Storage en states worden gecleared
 
 const AddScreen = () => {
 
@@ -20,20 +21,24 @@ const AddScreen = () => {
     const [searchResult, setSearchResult] = useState<SearchResult>();
 
     const checkandSetAantal = (input: string) => {
-        let toCheck: number = parseFloat(input.replace(",", "."))
-        if (isNaN(toCheck)) {
-            Alert.alert("This is not a number!");
-        } else {
-            setSelectedAantal(input)
-        }
-    }
-    const checkandSetAankoopprijs = (input: string) => {
 
         let toCheck: number = parseFloat(input.replace(",", "."))
         if (isNaN(toCheck)) {
             Alert.alert("This is not a number!");
         } else {
-            setSelectedAankoopprijs(input)
+            setSelectedAantal(toCheck.toString())
+        }
+    }
+
+    const checkandSetAankoopprijs = (input: string) => {
+
+        let toCheck: number = parseFloat(input.replace(",", "."))
+        console.log(toCheck)
+        if (isNaN(toCheck)) {
+            Alert.alert("This is not a number!");
+        } else {
+            setSelectedAankoopprijs(toCheck.toString())
+
         }
     }
 
@@ -45,9 +50,6 @@ const AddScreen = () => {
         setSearchResult(result);
     }
 
-    // useEffect(() => {
-    //     getSearch();
-    // }, [userInput]);
 
     const getStockPrice = async () => {
 
@@ -103,15 +105,15 @@ const AddScreen = () => {
             }
 
             await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+
+            //cleared alle states na adding item
             setSelectedAantal("")
             setSelectedAankoopprijs("")
             setUserInput("")
             setSelectedStock(undefined)
             setSearchResult(undefined)
-
         }
     };
-
 
     return (
 
@@ -126,11 +128,10 @@ const AddScreen = () => {
                     placeholderTextColor="#5A5A5A"
                     value={userInput}
                     onChangeText={(el) => setUserInput(el)}
-                    onSubmitEditing={(event) => getSearch()}
-                    
+                    onSubmitEditing={() => getSearch()}
                 />
 
-                {searchResult === undefined || searchResult['Error Message']  ? null
+                {searchResult === undefined || searchResult['Error Message'] ? null
                     : searchResult.bestMatches.length === 0 ? <Text style={styles.placeholder}>No search result</Text>
                         : searchResult.bestMatches.slice(0, 1).map((el, index) => <ResultTileAdd item={el} key={index} onAddID={setSelectedStock} />)
                 }
@@ -143,6 +144,7 @@ const AddScreen = () => {
                 placeholderTextColor="#5A5A5A"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
+                onChangeText={(el) => setSelectedAantal(el)}
                 onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
                 value={selectedAantal}
             />
@@ -151,8 +153,9 @@ const AddScreen = () => {
                 style={styles.textInput}
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                placeholder={selectedStock ? `Current price: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
+                placeholder={selectedStock ? `Current price ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()} ${selectedStock["8. currency"]}` : ''}
                 placeholderTextColor="#5A5A5A"
+                onChangeText={(el) => setSelectedAankoopprijs(el)}
                 onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
                 value={selectedAankoopprijs}
             />
@@ -165,7 +168,7 @@ const AddScreen = () => {
                     <Text style={styles.confirmationText}>{`${selectedAantal} shares have been selected`}</Text> : null}
 
                 {selectedAankoopprijs ?
-                    <Text style={styles.confirmationText}>{`${selectedAankoopprijs} as buying price has been selected`}</Text> : null}
+                    <Text style={styles.confirmationText}>{`${selectedAankoopprijs} ${selectedStock?.["8. currency"]} as buying price has been selected`}</Text> : null}
 
                 {(selectedStock && selectedAankoopprijs && selectedAantal) ?
 

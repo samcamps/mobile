@@ -11,7 +11,7 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
                 style={styles.pressable}
                 onPress={() => onAddID({ ['1. symbol']: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })}
             >
-                <Text style={styles.callToAction}>Press and hold to choose this stock</Text>
+                <Text style={styles.callToAction}>Press to choose this stock</Text>
                 <Text>{`Name: ${item['2. name']}`}</Text>
                 <Text>{`Symbol: ${item['1. symbol']}`}</Text>
                 <Text>{`Currency: ${item['8. currency']}`}</Text>

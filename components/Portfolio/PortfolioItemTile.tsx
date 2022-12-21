@@ -13,15 +13,13 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
     let currentAankoopprijs: string = '';
 
     const getStockPrice = async () => {
-        console.log('fire')
+
         if (portfolioItem !== undefined) {
             let response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${portfolioItem.stockid['1. symbol']}&apikey=A7ESV77V11YJI2U0`);
             let result = await response.json();
 
             currentAankoopprijs = result['Global Quote']['05. price']
-            console.log(currentAankoopprijs)
             calculations()
-            console.log("calc done")
         }
     }
 
@@ -73,7 +71,8 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
 
             <Pressable
                 style={styles.pressable}
-                onPress={() => {
+                delayLongPress={500}
+                onLongPress={() => {
 
                     deletePortfolioItem(portfolioItem.stockid);
                 }}
