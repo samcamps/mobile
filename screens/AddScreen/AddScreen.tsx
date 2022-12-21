@@ -107,7 +107,7 @@ const AddScreen = () => {
             setSelectedAankoopprijs("")
             setUserInput("")
             setSelectedStock(undefined)
-            setSearchResult()
+            setSearchResult(undefined)
 
         }
     };
