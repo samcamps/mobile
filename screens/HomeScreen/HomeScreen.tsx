@@ -61,12 +61,14 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ededed',
     },
     title: {
         marginTop: 20,
+        fontSize: 20,
+        color: "#424242",
         fontWeight: "bold",
-        alignSelf: "center",
+        paddingLeft: 25,
     },
     placeholder: {
         alignSelf: "center",

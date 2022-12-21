@@ -33,7 +33,7 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
                         navigation.navigate("Yahoo", { symbol: stockData?.['Global Quote']['01. symbol'] })
                     }}
                 >
-                    <Text>More info</Text>
+                    <Text style={styles.pressableYahooText}>More info</Text>
                 </Pressable>
             </View>
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         maxHeight: 170,
         marginTop: 15,
-        backgroundColor: "#dedddc",
+        backgroundColor: "white",
         paddingVertical: 15,
         paddingHorizontal: 15,
     },
@@ -73,9 +73,12 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: "#bdbcbb",
-        borderRadius: 15,
+        backgroundColor: "#165578",
+        borderRadius: 6,
         width: 83,
+    },
+    pressableYahooText: {
+        color: "white",
     },
     pressable: {
         paddingTop: 5,

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignSelf: "center",
         color: "white",
-        backgroundColor: "#3f75a2",
+        backgroundColor: "#165578",
     },
     pressableText: {
         color: "white",
