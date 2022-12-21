@@ -45,9 +45,9 @@ const AddScreen = () => {
         setSearchResult(result);
     }
 
-    useEffect(() => {
-        getSearch();
-    }, [userInput]);
+    // useEffect(() => {
+    //     getSearch();
+    // }, [userInput]);
 
     const getStockPrice = async () => {
 
@@ -103,9 +103,15 @@ const AddScreen = () => {
             }
 
             await AsyncStorage.setItem("storedportfolio", JSON.stringify(portfolio));
+            setSelectedAantal("")
+            setSelectedAankoopprijs("")
+            setUserInput("")
+            setSelectedStock(undefined)
+            setSearchResult()
 
         }
     };
+
 
     return (
 
@@ -118,10 +124,13 @@ const AddScreen = () => {
                     style={styles.textInput}
                     placeholder="Enter name or symbol"
                     placeholderTextColor="#5A5A5A"
-                    onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
+                    value={userInput}
+                    onChangeText={(el) => setUserInput(el)}
+                    onSubmitEditing={(event) => getSearch()}
+                    
                 />
 
-                {searchResult === undefined || searchResult['Error Message'] ? null
+                {searchResult === undefined || searchResult['Error Message']  ? null
                     : searchResult.bestMatches.length === 0 ? <Text style={styles.placeholder}>No search result</Text>
                         : searchResult.bestMatches.slice(0, 1).map((el, index) => <ResultTileAdd item={el} key={index} onAddID={setSelectedStock} />)
                 }
@@ -135,6 +144,7 @@ const AddScreen = () => {
                 keyboardType="decimal-pad"
                 returnKeyType="done"
                 onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
+                value={selectedAantal}
             />
             <Text style={styles.label}>Add the buying price</Text>
             <TextInput
@@ -144,6 +154,7 @@ const AddScreen = () => {
                 placeholder={selectedStock ? `Current price: ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()}` : ''}
                 placeholderTextColor="#5A5A5A"
                 onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
+                value={selectedAankoopprijs}
             />
 
             <View style={styles.confirmationContainer}>

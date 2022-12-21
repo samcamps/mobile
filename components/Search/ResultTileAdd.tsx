@@ -9,8 +9,7 @@ const ResultTile = ({ item, onAddID }: ResultTileAddProps) => {
         <View>
             <Pressable
                 style={styles.pressable}
-                delayLongPress={500}
-                onLongPress={() => onAddID({ ['1. symbol']: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })}
+                onPress={() => onAddID({ ['1. symbol']: item['1. symbol'], ["2. name"]: item['2. name'], ['8. currency']: item['8. currency'] })}
             >
                 <Text style={styles.callToAction}>Press and hold to choose this stock</Text>
                 <Text>{`Name: ${item['2. name']}`}</Text>
