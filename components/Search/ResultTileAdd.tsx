@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         borderRadius: 10,
-        maxHeight: 150,
+        maxHeight: 160,
         backgroundColor: "white",
         paddingVertical: 15,
         paddingHorizontal: 15,

@@ -92,13 +92,16 @@ const styles = StyleSheet.create({
         borderBottomColor: "darkgrey",
         backgroundColor: "white",
         borderBottomWidth: 1,
-        paddingTop: 12,
-        paddingBottom: 15,
+        paddingTop: 15,
+        paddingBottom: 17,
         paddingLeft: 20,
         paddingRight: 20,
     },
     company: {
-        paddingBottom: 5,
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "#424242",
+        paddingBottom: 10,
     },
     info: {
         display: "flex",
@@ -106,8 +109,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     title: {
+        lineHeight: 18,
     },
     value: {
+        lineHeight: 18,
     },
     performance: {
         display: "flex",

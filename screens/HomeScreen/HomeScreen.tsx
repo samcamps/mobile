@@ -44,7 +44,7 @@ const HomeScreen = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Favorites</Text>
 
-            <ScrollView>
+            <ScrollView style={styles.favoritesContainer}>
                 {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Search and add your favorite stocks</Text>
                     : <View>
                         {favorites?.myFavorites.map((favorite, index) => (
@@ -65,10 +65,15 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 20,
+        marginBottom: 28,
         fontSize: 20,
         color: "#424242",
         fontWeight: "bold",
         paddingLeft: 25,
+    },
+    favoritesContainer: {
+        borderTopColor: "darkgrey",
+        borderTopWidth: 1,
     },
     placeholder: {
         alignSelf: "center",

@@ -205,11 +205,10 @@ const styles = StyleSheet.create({
     },
     placeholder: {
         alignSelf: "center",
-        marginTop: 20,
-        marginBottom: 40,
+        marginBottom: 20,
     },
     confirmationContainer: {
-        marginTop: 0,
+        marginTop: 10,
     },
     confirmationText: {
         alignSelf: "flex-start",

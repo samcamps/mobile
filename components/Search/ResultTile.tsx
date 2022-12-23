@@ -41,18 +41,18 @@ const ResultTile = ({ item }: ResultTileProps) => {
 
         <View style={styles.container}>
 
-            <View style={styles.text}>
-                <Text>{`Name: ${item['2. name']}`}</Text>
-                <Text>{`Symbol: ${item['1. symbol']}`}</Text>
-                <Text>{`Currency: ${item['8. currency']}`}</Text>
-                <Text>{`Region: ${item['4. region']}`}</Text>
+            <View style={styles.textContainer}>
+                <Text style={styles.title}>{item['1. symbol']}</Text>
+                <Text style={styles.text}>{`Name: ${item['2. name']}`}</Text>              
+                <Text style={styles.text}>{`Currency: ${item['8. currency']}`}</Text>
+                <Text style={styles.text}>{`Region: ${item['4. region']}`}</Text>
             </View>
 
             <Pressable
                 style={styles.pressable}
                 onPress={storeData}
             >
-                <FontAwesome name="star-o" size={22} color="#5A5A5A" />
+                <FontAwesome name="star-o" size={22} color="#7b7b7b" />
             </Pressable>
         </View>
     )
@@ -65,15 +65,24 @@ const styles = StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         borderRadius: 10,
-        maxHeight: 120,
+        maxHeight: 150,
         marginTop: 15,
         backgroundColor: "white",
         paddingVertical: 15,
         paddingHorizontal: 15,
     },
-    text: {
+    textContainer: {
         width: "90%",
         marginRight: 5,
+    },
+    title: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#424242",
+        paddingBottom: 7,
+    },
+    text: {
+        lineHeight: 18,
     },
     pressable: {
         paddingTop: 4,

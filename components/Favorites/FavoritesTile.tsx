@@ -23,10 +23,11 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
     return (
         <View style={styles.container}>
 
-            <View style={styles.text}>
-                <Text>{`${stockid['2. name']} (${stockid['1. symbol']})`}</Text>
-                <Text>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
-                <Text>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
+            <View style={styles.textContainer}>
+                <Text style={styles.title}>{stockid['1. symbol']}</Text>
+                <Text style={styles.text}>{stockid['2. name']}</Text>
+                <Text style={styles.text}>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
+                <Text style={styles.text}>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
                 <Pressable
                     style={styles.pressableYahoo}
                     onPress={() => {
@@ -42,10 +43,10 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
                     deleteFavorite(stockid);
                 }}
             >
-                <Feather name="x" size={25} color="#5A5A5A" />
+                <Feather name="x" size={25} color="#7b7b7b" />
             </Pressable>
 
-        </View >
+        </View>
     )
 }
 
@@ -56,19 +57,29 @@ const styles = StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         borderRadius: 10,
-        maxHeight: 170,
+        maxHeight: 180,
         marginTop: 15,
         backgroundColor: "white",
         paddingVertical: 15,
         paddingHorizontal: 15,
     },
-    text: {
+    textContainer: {
         width: "85%",
         marginRight: 17,
     },
+    title: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#424242",
+        paddingBottom: 7,
+    },
+    text: {
+        lineHeight: 18,
+    },
     pressableYahoo: {
         alignItems: "center",
-        marginTop: 10,
+        marginTop: 12,
+        marginBottom: 2,
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,

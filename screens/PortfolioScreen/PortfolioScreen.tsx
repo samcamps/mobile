@@ -100,10 +100,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         paddingLeft: 25,
     },
-    placeholder: {
-        alignSelf: "center",
-        marginTop: 30,
-    },
     pressable: {
         marginTop: 20,
         marginBottom: 20,
@@ -122,6 +118,10 @@ const styles = StyleSheet.create({
     portfolioItemContainer: {
         borderTopColor: "darkgrey",
         borderTopWidth: 1,
+    },
+    placeholder: {
+        alignSelf: "center",
+        marginTop: 30,
     }
 });
 
