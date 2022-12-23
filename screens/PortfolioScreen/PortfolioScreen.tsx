@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, ScrollView, Alert, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Alert, Pressable } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { Portfolio, StockID } from "../../types";
 import PortfolioItemTile from "../../components/Portfolio/PortfolioItemTile";
-
 
 const PortfolioScreen = () => {
 
@@ -55,8 +54,9 @@ const PortfolioScreen = () => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>Portfolio</Text>
-            <Pressable
+            <View style={styles.header}>
+                <Text style={styles.title}>Portfolio</Text>
+                <Pressable
                     style={styles.pressable}
                     onPress={() => {
                         navigation.navigate("Add")
@@ -64,6 +64,7 @@ const PortfolioScreen = () => {
                 >
                     <Text style={styles.pressableText}>Add stock</Text>
                 </Pressable>
+            </View>
 
             <ScrollView style={styles.portfolioItemContainer}>
                 {(portfolio === undefined || portfolio.myPortfolio.length == 0) ? <Text style={styles.placeholder}>Build your portfolio by adding stocks</Text>
@@ -84,12 +85,20 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ededed',
+    },
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingRight: 25,
     },
     title: {
         marginTop: 20,
+        fontSize: 20,
+        color: "#424242",
         fontWeight: "bold",
-        alignSelf: "center",
+        paddingLeft: 25,
     },
     placeholder: {
         alignSelf: "center",
@@ -98,18 +107,17 @@ const styles = StyleSheet.create({
     pressable: {
         marginTop: 20,
         marginBottom: 20,
-        height: 40,
-        width: 110,
+        height: 32,
+        width: 100,
         borderRadius: 50,
-        alignSelf: "center",
         color: "white",
         backgroundColor: "#165578",
     },
     pressableText: {
         color: "white",
         alignSelf: "center",
-        paddingTop: 10,
-        fontSize: 16,
+        paddingTop: 7,
+        fontSize: 15,
     },
     portfolioItemContainer: {
         borderTopColor: "darkgrey",

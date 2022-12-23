@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         backgroundColor: "#165578",
-        borderRadius: 6,
+        borderRadius: 15,
         width: 83,
     },
     pressableYahooText: {

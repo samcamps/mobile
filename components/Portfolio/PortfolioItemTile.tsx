@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { PortfolioItemTileProps } from '../../types';
 
 const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItemTileProps) => {
@@ -58,12 +58,12 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
                 <Text style={styles.value}>
                     {prestatiePercentage > 0 ?
                         <View style={styles.performance}>
-                            <Text style={{ color: "green" }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "green", paddingTop: 3 }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
                             <Text style={{ color: "green" }}>{`+${prestatiePercentage.toFixed(2)}%`}</Text>
                         </View>
 
                         : <View style={styles.performance}>
-                            <Text style={{ color: "red" }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "red", paddingTop: 3 }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
                             <Text style={{ color: "red", }}>{`${prestatiePercentage.toFixed(2)}%`}</Text>
                         </View>}
                 </Text>
@@ -89,10 +89,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         width: "100%",
         alignSelf: "center",
-        marginTop: 12,
         borderBottomColor: "darkgrey",
+        backgroundColor: "white",
         borderBottomWidth: 1,
-        paddingBottom: 12,
+        paddingTop: 12,
+        paddingBottom: 15,
         paddingLeft: 20,
         paddingRight: 20,
     },
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     info: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     title: {
     },
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     performance: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-end"
+        alignItems: "flex-end",
     },
     pressable: {
         alignItems: "center",

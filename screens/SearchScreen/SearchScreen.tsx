@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SearchResult } from '../../types';
 import ResultTile from '../../components/Search/ResultTile';
+import Constants from "expo-constants";
 
 const SearchScreen = () => {
 
@@ -25,6 +26,8 @@ const SearchScreen = () => {
 
         <View style={styles.container}>
 
+            <Text style={styles.title}>Search</Text>
+
             <TextInput
                 style={styles.searchBar}
                 placeholder="Search by name or symbol"
@@ -45,18 +48,25 @@ const SearchScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
-        paddingTop: 80,
-        backgroundColor: '#fff',
+        backgroundColor: '#ededed',
+    },
+    title: {
+        marginTop: 20,
+        fontSize: 20,
+        color: "#424242",
+        fontWeight: "bold",
+        paddingLeft: 25,
     },
     searchBar: {
         height: 40,
         width: "90%",
         borderRadius: 10,
-        borderColor: "lightgrey",
-        borderWidth: 1,
+        backgroundColor: "white",
         alignSelf: "center",
         paddingLeft: 15,
+        marginTop: 15,
     },
     placeholder: {
         alignSelf: "center",

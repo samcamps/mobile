@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
 import { Portfolio, SearchResult, StockID } from "../../types";
 import ResultTileAdd from "../../components/Search/ResultTileAdd";
 
@@ -119,7 +118,6 @@ const AddScreen = () => {
         <View style={styles.container} >
 
             <Text style={styles.label}>Search the stock</Text>
-
             <View>
                 <TextInput
                     style={styles.textInput}
@@ -186,9 +184,9 @@ const AddScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Constants.statusBarHeight,
+        paddingTop: 30,
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ededed',
     },
     label: {
         marginLeft: 25,
@@ -198,11 +196,12 @@ const styles = StyleSheet.create({
         height: 40,
         width: "90%",
         borderRadius: 10,
+        backgroundColor: "white",
         borderColor: "lightgrey",
         borderWidth: 1,
         alignSelf: "center",
         paddingLeft: 15,
-        marginBottom: 30,
+        marginBottom: 15,
     },
     placeholder: {
         alignSelf: "center",

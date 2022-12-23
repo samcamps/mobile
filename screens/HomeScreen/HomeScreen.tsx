@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { View, Text, StyleSheet, Pressable, Alert, ScrollView } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
 import { Favorites, StockID } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FavoritesTile from "../../components/Favorites/FavoritesTile";

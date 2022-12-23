@@ -15,7 +15,6 @@ const YahooScreen = () => {
 
         />
     );
-
 }
 
 export default YahooScreen;

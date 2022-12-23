@@ -1,7 +1,8 @@
 import React from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Favorites, ResultTileProps } from '../../types';
-import { EvilIcons } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons'; 
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ResultTile = ({ item }: ResultTileProps) => {
@@ -51,7 +52,7 @@ const ResultTile = ({ item }: ResultTileProps) => {
                 style={styles.pressable}
                 onPress={storeData}
             >
-                <EvilIcons name="star" size={28} color="#5A5A5A" />
+                <FontAwesome name="star-o" size={22} color="#5A5A5A" />
             </Pressable>
         </View>
     )
@@ -66,15 +67,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         maxHeight: 120,
         marginTop: 15,
-        backgroundColor: "#dedddc",
+        backgroundColor: "white",
         paddingVertical: 15,
         paddingHorizontal: 15,
     },
     text: {
         width: "90%",
+        marginRight: 5,
     },
     pressable: {
-        paddingTop: 5,
+        paddingTop: 4,
     }
 });
 
