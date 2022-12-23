@@ -26,7 +26,7 @@ const FavoritesTile = ({ stockid, deleteFavorite }: FavoritesTileProps) => {
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{stockid['1. symbol']}</Text>
                 <Text style={styles.text}>{stockid['2. name']}</Text>
-                <Text style={styles.text}>{`Price: ${stockData?.['Global Quote']['05. price']} ${stockid['8. currency']}`}</Text>
+                <Text style={styles.text}>{`Price: ${parseFloat(stockData?.['Global Quote']['05. price']!).toFixed(2)} ${stockid['8. currency']}`}</Text>
                 <Text style={styles.text}>{`Latest trading day: ${stockData?.['Global Quote']['07. latest trading day']}`}</Text>
                 <Pressable
                     style={styles.pressableYahoo}
