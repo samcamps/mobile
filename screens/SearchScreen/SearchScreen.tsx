@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignSelf: "center",
         paddingLeft: 15,
-        marginTop: 15,
+        marginTop: 28,
     },
     placeholder: {
         alignSelf: "center",
