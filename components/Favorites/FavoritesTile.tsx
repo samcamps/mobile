@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         width: "85%",
-        marginRight: 17,
+        marginRight: 19,
     },
     title: {
         fontSize: 15,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
     },
     text: {
-        lineHeight: 18,
+        lineHeight: 20,
     },
     pressableYahoo: {
         alignItems: "center",
