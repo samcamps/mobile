@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         justifyContent: "flex-start",
-        width: "90%",
+        width: "93%",
         alignSelf: "center",
         borderRadius: 10,
         maxHeight: 150,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
     },
     text: {
-        lineHeight: 18,
+        lineHeight: 20,
     },
     pressable: {
         paddingTop: 4,

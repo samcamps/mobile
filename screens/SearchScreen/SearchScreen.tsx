@@ -26,14 +26,18 @@ const SearchScreen = () => {
 
         <View style={styles.container}>
 
-            <Text style={styles.title}>Search</Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>Search</Text>
+            </View>
 
-            <TextInput
-                style={styles.searchBar}
-                placeholder="Search by name or symbol"
-                placeholderTextColor="#5A5A5A"
-                onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
-            />
+            <View>
+                <TextInput
+                    style={styles.searchBar}
+                    placeholder="Search by name or symbol"
+                    placeholderTextColor="#5A5A5A"
+                    onSubmitEditing={(event) => setUserInput(event.nativeEvent.text)}
+                />
+            </View>
 
             <View style={styles.resultContainer}>
                 {searchResult === undefined || searchResult['Error Message'] ? null
@@ -52,18 +56,25 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ededed',
     },
+    header: {
+        borderBottomColor: "darkgrey",
+        borderBottomWidth: 1,
+    },
     title: {
         marginTop: 20,
         fontSize: 20,
         color: "#424242",
         fontWeight: "bold",
-        paddingLeft: 25,
+        marginLeft: 22,
+        marginBottom: 28,
     },
     searchBar: {
         height: 40,
-        width: "90%",
+        width: "93%",
         borderRadius: 10,
         backgroundColor: "white",
+        borderColor: "lightgrey",
+        borderWidth: 1,
         alignSelf: "center",
         paddingLeft: 15,
         marginTop: 28,

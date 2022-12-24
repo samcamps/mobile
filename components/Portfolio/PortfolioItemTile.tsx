@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     title: {
-        lineHeight: 18,
+        lineHeight: 19,
     },
     value: {
-        lineHeight: 18,
+        lineHeight: 19,
     },
     performance: {
         display: "flex",

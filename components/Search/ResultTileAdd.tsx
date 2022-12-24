@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     pressable: {
         flexDirection: "column",
         justifyContent: "flex-start",
-        width: "90%",
+        width: "93%",
         alignSelf: "center",
         borderRadius: 10,
         maxHeight: 160,

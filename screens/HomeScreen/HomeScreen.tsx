@@ -42,9 +42,12 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Favorites</Text>
 
-            <ScrollView style={styles.favoritesContainer}>
+            <View style={styles.header}>
+                <Text style={styles.title}>Favorites</Text>
+            </View>
+
+            <ScrollView>
                 {(favorites === undefined || favorites.myFavorites.length == 0) ? <Text style={styles.placeholder}>Search and add your favorite stocks</Text>
                     : <View>
                         {favorites?.myFavorites.map((favorite, index) => (
@@ -63,17 +66,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ededed',
     },
+    header: {
+        borderBottomColor: "darkgrey",
+        borderBottomWidth: 1,
+    },
     title: {
         marginTop: 20,
         marginBottom: 28,
         fontSize: 20,
         color: "#424242",
         fontWeight: "bold",
-        paddingLeft: 25,
-    },
-    favoritesContainer: {
-        borderTopColor: "darkgrey",
-        borderTopWidth: 1,
+        marginLeft: 22,
     },
     placeholder: {
         alignSelf: "center",

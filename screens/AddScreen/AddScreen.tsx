@@ -189,12 +189,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#ededed',
     },
     label: {
-        marginLeft: 25,
+        marginLeft: 22,
         marginBottom: 7,
     },
     textInput: {
         height: 40,
-        width: "90%",
+        width: "93%",
         borderRadius: 10,
         backgroundColor: "white",
         borderColor: "lightgrey",
