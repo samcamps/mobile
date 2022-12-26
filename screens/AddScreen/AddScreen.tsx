@@ -20,26 +20,20 @@ const AddScreen = () => {
     const [searchResult, setSearchResult] = useState<SearchResult>();
 
     const checkandSetAantal = (input: string) => {
-
-        if (input !== undefined) {
-            if (isNaN(parseFloat(input))) {
-                Alert.alert("Please enter a valid number");
-            } else {
-                let toStore: number = parseFloat(input.replace(",", "."))
-                setSelectedAantal(toStore.toString())
-            }
+        let toCheck: number = parseFloat(input.replace(",", "."))
+        if (isNaN(toCheck)) {
+            Alert.alert("This is not a valid number");
+        } else {
+            setSelectedAantal(toCheck.toString())
         }
     }
-
     const checkandSetAankoopprijs = (input: string) => {
 
-        if (input !== undefined) {
-            if (isNaN(parseFloat(input))) {
-                Alert.alert("Please enter a valid price");
-            } else {
-                let toStore: number = parseFloat(input.replace(",", "."))
-                setSelectedAankoopprijs(toStore.toString())
-            }
+        let toCheck: number = parseFloat(input.replace(",", "."))
+        if (isNaN(toCheck)) {
+            Alert.alert("This is not a valid price");
+        } else {
+            setSelectedAankoopprijs(toCheck.toString())
         }
     }
 
@@ -116,16 +110,6 @@ const AddScreen = () => {
         }
     };
 
-
-    const testAantal = (input: string) => {
-        setSelectedAantal(input);
-        checkandSetAantal(input);
-    }
-    const testAankoopprijs = (input: string) => {
-        setSelectedAankoopprijs(input);
-        checkandSetAankoopprijs(input);
-    }
-
     return (
 
         <View style={styles.container} >
@@ -154,8 +138,8 @@ const AddScreen = () => {
                 placeholderTextColor="#5A5A5A"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                onChangeText={(el) => testAantal(el)}
-                // onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
+                onChangeText={(el) => setSelectedAantal(el)}
+                onSubmitEditing={(event) => checkandSetAantal(event.nativeEvent.text)}
                 value={selectedAantal}
             />
             <Text style={styles.label}>Add the buying price</Text>
@@ -165,8 +149,8 @@ const AddScreen = () => {
                 returnKeyType="done"
                 placeholder={selectedStock ? `Current price ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()} ${selectedStock["8. currency"]}` : ''}
                 placeholderTextColor="#5A5A5A"
-                onChangeText={(el) => testAankoopprijs(el)}
-                // onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
+                onChangeText={(el) => setSelectedAankoopprijs(el)}
+                onSubmitEditing={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
                 value={selectedAankoopprijs}
             />
 
