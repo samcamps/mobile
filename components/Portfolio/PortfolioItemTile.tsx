@@ -63,8 +63,8 @@ const PortfolioItemTile = ({ portfolioItem, deletePortfolioItem }: PortfolioItem
                         </View>
 
                         : <View style={styles.performance}>
-                            <Text style={{ color: "red", paddingTop: 3 }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
-                            <Text style={{ color: "red", }}>{`${prestatiePercentage.toFixed(2)}%`}</Text>
+                            <Text style={{ color: "red",  paddingTop: 3 }}>{`${prestatie.toFixed(2)} ${portfolioItem.stockid['8. currency']}`}</Text>
+                            <Text style={{ color: "red" }}>{`${prestatiePercentage.toFixed(2)}%`}</Text>
                         </View>}
                 </Text>
             </View>
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         borderColor: "#bdbcbb",
         borderWidth: 1,
         borderRadius: 15,
-        width: 120,
+        width: "40%",
     }
 });
 

@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         borderColor: "#bdbcbb",
         borderWidth: 1,
         borderRadius: 15,
-        width: 83,
+        width: "35%",
     },
     pressable: {
         paddingTop: 5,

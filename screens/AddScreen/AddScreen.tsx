@@ -32,7 +32,6 @@ const AddScreen = () => {
     const checkandSetAankoopprijs = (input: string) => {
 
         let toCheck: number = parseFloat(input.replace(",", "."))
-        console.log(toCheck)
         if (isNaN(toCheck)) {
             Alert.alert("Please enter a valid price");
         } else {
@@ -216,9 +215,11 @@ const styles = StyleSheet.create({
         marginBottom: 7,
     },
     pressable: {
+        display: "flex",
+        justifyContent: "center",
         marginTop: 20,
-        height: 40,
-        width: 160,
+        height: 45,
+        width: "45%",
         borderRadius: 50,
         alignSelf: "center",
         backgroundColor: "#165578",
@@ -226,7 +227,6 @@ const styles = StyleSheet.create({
     pressableText: {
         color: "white",
         alignSelf: "center",
-        paddingTop: 10,
         fontSize: 16,
     }
 });

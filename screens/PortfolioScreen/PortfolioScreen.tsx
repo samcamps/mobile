@@ -103,19 +103,20 @@ const styles = StyleSheet.create({
         marginLeft: 22,
     },
     pressable: {
+        display: "flex",
+        justifyContent: "center",
         marginTop: 22,
         marginBottom: 14,
         marginRight: 2,
         height: 36,
-        width: 110,
+        width: "35%",
         borderRadius: 50,
         color: "white",
         backgroundColor: "#165578",
     },
     pressableText: {
         color: "white",
-        alignSelf: "center",
-        paddingTop: 9,
+        alignSelf: "center",        
         fontSize: 15,
     },
     placeholder: {
