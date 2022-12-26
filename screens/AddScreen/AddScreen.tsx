@@ -21,21 +21,25 @@ const AddScreen = () => {
 
     const checkandSetAantal = (input: string) => {
 
-        let toCheck: number = parseFloat(input.replace(",", "."))
-        if (isNaN(toCheck)) {
-            Alert.alert("Please enter a valid number");
-        } else {
-            setSelectedAantal(toCheck.toString())
+        if (input !== undefined) {
+            if (isNaN(parseFloat(input))) {
+                Alert.alert("Please enter a valid number");
+            } else {
+                let toStore: number = parseFloat(input.replace(",", "."))
+                setSelectedAantal(toStore.toString())
+            }
         }
     }
 
     const checkandSetAankoopprijs = (input: string) => {
 
-        let toCheck: number = parseFloat(input.replace(",", "."))
-        if (isNaN(toCheck)) {
-            Alert.alert("Please enter a valid price");
-        } else {
-            setSelectedAankoopprijs(toCheck.toString())
+        if (input !== undefined) {
+            if (isNaN(parseFloat(input))) {
+                Alert.alert("Please enter a valid price");
+            } else {
+                let toStore: number = parseFloat(input.replace(",", "."))
+                setSelectedAankoopprijs(toStore.toString())
+            }
         }
     }
 
@@ -112,6 +116,16 @@ const AddScreen = () => {
         }
     };
 
+
+    const testAantal = (input: string) => {
+        setSelectedAantal(input);
+        checkandSetAantal(input);
+    }
+    const testAankoopprijs = (input: string) => {
+        setSelectedAankoopprijs(input);
+        checkandSetAankoopprijs(input);
+    }
+
     return (
 
         <View style={styles.container} >
@@ -140,8 +154,8 @@ const AddScreen = () => {
                 placeholderTextColor="#5A5A5A"
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                onChangeText={(el) => setSelectedAantal(el)}
-                onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
+                onChangeText={(el) => testAantal(el)}
+                // onBlur={(event) => checkandSetAantal(event.nativeEvent.text)}
                 value={selectedAantal}
             />
             <Text style={styles.label}>Add the buying price</Text>
@@ -151,8 +165,8 @@ const AddScreen = () => {
                 returnKeyType="done"
                 placeholder={selectedStock ? `Current price ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()} ${selectedStock["8. currency"]}` : ''}
                 placeholderTextColor="#5A5A5A"
-                onChangeText={(el) => setSelectedAankoopprijs(el)}
-                onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
+                onChangeText={(el) => testAankoopprijs(el)}
+                // onBlur={(event) => checkandSetAankoopprijs(event.nativeEvent.text)}
                 value={selectedAankoopprijs}
             />
 
