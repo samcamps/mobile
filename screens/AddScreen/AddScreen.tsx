@@ -147,7 +147,7 @@ const AddScreen = () => {
                 style={styles.textInput}
                 keyboardType="decimal-pad"
                 returnKeyType="done"
-                placeholder={selectedStock ? `Current price ${selectedStock?.["1. symbol"]}: ${currentAankoopprijs?.toString()} ${selectedStock["8. currency"]}` : ''}
+                placeholder={selectedStock ? `Current price ${selectedStock?.["1. symbol"]}: ${parseFloat(currentAankoopprijs!).toFixed(2)} ${selectedStock["8. currency"]}` : ''}
                 placeholderTextColor="#5A5A5A"
                 onChangeText={(el) => setSelectedAankoopprijs(el)}
                 onSubmitEditing={(event) => checkandSetAankoopprijs(event.nativeEvent.text)} 
